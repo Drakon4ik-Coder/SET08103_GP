@@ -5,7 +5,7 @@ services:
   mysql:
     container_name: db
     build:
-      context: target/db
+      context: ./db
       args:
         - MYSQL_DATABASE=${MYSQL_DATABASE}
         - MYSQL_USER=${MYSQL_USER}
@@ -15,5 +15,4 @@ services:
       - "${MYSQL_PORT}:3386"
   app:
     container_name: backend
-    build:
-      context: target/classes
+    build: .
