@@ -15,9 +15,9 @@ jobs:
           distribution: 'adopt'
       - name: Compile with Maven
         run: mvn compile
-      - name: Build Docker Image
-        run: docker build -t semimage target/classes/.
-      - name: Run image
-        run: docker run --name semcontainer -d semimage
+      - name: Compose docker services
+        run: docker compose build
+      - name: Run services
+        run: docker compose up -d
       - name: view logs
-        run: docker logs semcontainer
+        run: docker compose logs

@@ -1,0 +1,19 @@
+version: '3.8'
+name: world_app
+services:
+  ### MySQL Container
+  mysql:
+    container_name: db
+    build:
+      context: target/db
+      args:
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3386"
+  app:
+    container_name: backend
+    build:
+      context: target/classes
