@@ -46,5 +46,18 @@ public class DBReader {
         }
         return results;
     }
+    public static List<CapitalCity> queryCapitalCities(String hqlQuery, int limit) {
+        List<CapitalCity> results = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            results = session.createQuery(hqlQuery, CapitalCity.class)
+                    .setMaxResults(limit)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
 
 }

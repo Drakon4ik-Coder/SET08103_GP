@@ -13,7 +13,7 @@ public class Main {
         for (City city : cities) {
             System.out.println(city.toString());
         }
-
+        System.out.println("1");
     }
 }
 
