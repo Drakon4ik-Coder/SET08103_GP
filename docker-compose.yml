@@ -5,14 +5,11 @@ services:
   mysql:
     container_name: db
     build:
-      context: ./db
+      context: .
       args:
         - MYSQL_DATABASE=${MYSQL_DATABASE}
         - MYSQL_USER=${MYSQL_USER}
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
-      - "${MYSQL_PORT}:3386"
-  app:
-    container_name: backend
-    build: .
+      - "${MYSQL_PORT}:3306"
