@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBReader {
-    private static String jdbcUrl = "jdbc:mysql://localhost:3306/world";
+    private static String jdbcUrl = "jdbc:mysql://mysql:3306/world";
     private static String username = "root";
     private static String password = "1234";
 
