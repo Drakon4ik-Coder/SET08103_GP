@@ -22,5 +22,7 @@ jobs:
         run: docker-compose -f docker-compose.yml build
       - name: Run services
         run: docker-compose -f docker-compose.yml up -d
-      - name: View logs
-        run: docker-compose -f docker-compose.yml logs
+      - name: View mysql logs
+        run: docker-compose -f docker-compose.yml logs mysql
+      - name: View app container logs
+        run: docker-compose -f docker-compose.yml logs app
