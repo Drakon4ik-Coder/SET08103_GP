@@ -15,9 +15,9 @@ jobs:
           distribution: 'adopt'
       - name: Compile with Maven
         run: mvn compile
-      - name: Compose docker services
-        run: docker compose build
+      - name: Compose Docker services
+        run: docker-compose -f docker-compose.yml build
       - name: Run services
-        run: docker compose up -d
-      - name: view logs
-        run: docker compose logs
+        run: docker-compose -f docker-compose.yml up -d
+      - name: View logs
+        run: docker-compose -f docker-compose.yml logs
