@@ -19,11 +19,27 @@ public class DBReader {
         }
     }
 
-    public static List<Country> queryCountries(String hqlQuery) {
+    public static List<Country> queryCountries(String hqlQuery, int limit) {
         List<Country> results = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            results = session.createQuery(hqlQuery, Country.class).list();
+            results = session.createQuery(hqlQuery, Country.class)
+                    .setMaxResults(limit)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
+    public static List<City> queryCities(String hqlQuery, int limit) {
+        List<City> results = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            results = session.createQuery(hqlQuery, City.class)
+                    .setMaxResults(limit)
+                    .list();
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
