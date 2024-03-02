@@ -23,9 +23,14 @@ public class DBReader {
         List<Country> results = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            results = session.createQuery(hqlQuery, Country.class)
-                    .setMaxResults(limit)
-                    .list();
+            if (limit > 0) {
+                results = session.createQuery(hqlQuery, Country.class)
+                        .setMaxResults(limit)
+                        .list();
+            }
+            else {
+                results = session.createQuery(hqlQuery, Country.class).list();
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,14 +42,20 @@ public class DBReader {
         List<City> results = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            results = session.createQuery(hqlQuery, City.class)
-                    .setMaxResults(limit)
-                    .list();
+            if (limit > 0) {
+                results = session.createQuery(hqlQuery, City.class)
+                        .setMaxResults(limit)
+                        .list();
+            }
+            else {
+                results = session.createQuery(hqlQuery, City.class).list();
+            }
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return results;
     }
+
 
 }
