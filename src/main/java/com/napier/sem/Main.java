@@ -35,11 +35,15 @@ public class Main {
                 continue;
             }
         }
+
     }
 
     public static List<Country> getTopPopulatedCountries(int limit) {
         String hqlQuery = "FROM Country ORDER BY population DESC";
-        return DBReader.queryCountries(hqlQuery, limit);
+        return DBReader.queryCountries(hqlQuery, limit, null, null);
     }
+
+
+
 }
 
