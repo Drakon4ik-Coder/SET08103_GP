@@ -15,12 +15,26 @@ public class Main {
             System.out.println(city.toString());
         }*/
 
-        List<Country> topCountries = getTopPopulatedCountries(10);
-        for (Country country : topCountries) {
-            System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
+        // Country Report for region(limit N)
+        List<Country> topNPopulatedCountries = getTopPopulatedCountries(10);
+        for (Country country : topNPopulatedCountries) {
+            try {
+                System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
+            }
+            catch (NullPointerException e) {
+                continue;
+            }
         }
-
-
+        // Country Report for world
+        List<Country> topPopulatedCountries = getTopPopulatedCountries(0);
+        for (Country country : topPopulatedCountries) {
+            try {
+                System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
+            }
+            catch (NullPointerException e) {
+                continue;
+            }
+        }
     }
 
     public static List<Country> getTopPopulatedCountries(int limit) {
