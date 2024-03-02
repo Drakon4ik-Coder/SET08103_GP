@@ -1,9 +1,9 @@
-name: A workflow for my Hello World App
+name: Docker compose test
 on: push
 
 jobs:
   build:
-    name: Hello world action
+    name: Docker compose test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
