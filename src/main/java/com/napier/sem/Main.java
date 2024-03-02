@@ -40,7 +40,20 @@ public class Main {
                                 continue;
                             }
                         }
+                    case "2":
+                        // Country Report for continent (limit N)
+                        System.out.println("Enter the maximum number of results (0 for no limit): ");
+                        limit = Integer.parseInt(reader.readLine());
 
+                        List<Country> topPopulatedCountriesInContinent = getTopPopulatedCountriesInContinent(10, "Europe");
+                        for (Country country : topPopulatedCountriesInContinent) {
+                            try {
+                                System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
+                            }
+                            catch (NullPointerException e) {
+                                continue;
+                            }
+                        }
                     case "exit":
                         break;
                     default:
@@ -73,7 +86,10 @@ public class Main {
         return DBReader.queryCountries(hqlQuery, limit, null, null);
     }
 
-
+    public static List<Country> getTopPopulatedCountriesInContinent(int limit, String continent) {
+        String hqlQuery = "FROM Country WHERE continent = :continent ORDER BY population DESC";
+        return DBReader.queryCountries(hqlQuery, limit, continent, "continent");
+    }
 
 
 
