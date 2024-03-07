@@ -17,10 +17,9 @@ public class Main {
                 int limit = 0;
                 switch (input) {
                     case "1":
-                        // Country Report for world
+                        // Country Report for world & (limit N)
                         System.out.println("Enter the maximum number of results (0 for no limit): ");
                         limit = Integer.parseInt(reader.readLine());
-
                         List<Country> topPopulatedCountries = getTopPopulatedCountries(limit);
                         for (Country country : topPopulatedCountries) {
                             try {
@@ -31,12 +30,28 @@ public class Main {
                             }
                         }
                     case "2":
-                        // Country Report for continent (limit N)
+                        // Country Report for continent & (limit N)
                         System.out.println("Enter the maximum number of results (0 for no limit): ");
                         limit = Integer.parseInt(reader.readLine());
-
-                        List<Country> topPopulatedCountriesInContinent = getTopPopulatedCountriesInContinent(10, "Europe");
+                        System.out.println("Enter the continent name: ");
+                        String continent1 = reader.readLine();
+                        List<Country> topPopulatedCountriesInContinent = getTopPopulatedCountriesInContinent(limit, continent1);
                         for (Country country : topPopulatedCountriesInContinent) {
+                            try {
+                                System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
+                            }
+                            catch (NullPointerException e) {
+                                continue;
+                            }
+                        }
+                    case "3":
+                        // Country report for region & (limit N)
+                        System.out.println("Enter the maximum number of results (0 for no limit): ");
+                        limit = Integer.parseInt(reader.readLine());
+                        System.out.println("Enter the region name: ");
+                        String region1 = reader.readLine();
+                        List<Country> topPopulatedCountriesInRegion = getTopPopulatedCountriesInRegion(limit, region1);
+                        for (Country country : topPopulatedCountriesInRegion) {
                             try {
                                 System.out.println("Code: " + country.getCode() + ", Name: " + country.getName() + ", Continent: " + country.getContinent() + ", Region: " + country.getRegion() + ", Population: " + country.getPopulation() + ", Capital: " + country.getCapital().getName());
                             }
@@ -81,7 +96,10 @@ public class Main {
         return DBReader.queryCountries(hqlQuery, limit, continent, "continent");
     }
 
-
+    public static List<Country> getTopPopulatedCountriesInRegion(int limit, String region) {
+        String hqlQuery = "FROM Country WHERE region = :region ORDER BY population DESC";
+        return DBReader.queryCountries(hqlQuery, limit, region, "region");
+    }
 
 }
 
