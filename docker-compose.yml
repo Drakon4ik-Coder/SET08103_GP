@@ -1,15 +1,40 @@
 version: '3.8'
-name: world_app
+
 services:
   ### MySQL Container
   mysql:
-    container_name: db
+    container_name: mysql
     build:
-      context: .
-      args:
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
-        - MYSQL_USER=${MYSQL_USER}
-        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      context: ./db
+
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "3306:3306"
+    networks:
+      - network1
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_ROOT_HOST: '%'
+      DATABASE_PORT: 3306
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 10s
+      retries: 10
+
+  app:
+    container_name: app
+    build: .
+    ports:
+      - "80:8000"
+    networks:
+      - network1
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  network1:
+    name: se-methods
+    driver: bridge

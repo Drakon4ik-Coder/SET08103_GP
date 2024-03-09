@@ -1,9 +1,9 @@
-name: A workflow for my Hello World App
+name: Docker compose test
 on: push
 
 jobs:
   build:
-    name: Hello world action
+    name: Docker compose test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -15,9 +15,14 @@ jobs:
           distribution: 'adopt'
       - name: Compile with Maven
         run: mvn compile
-      - name: Compose docker services
-        run: docker compose build
+      - name: Package with Maven
+        run: mvn package
+
+      - name: Compose Docker services
+        run: docker-compose -f docker-compose.yml build
       - name: Run services
-        run: docker compose up -d
-      - name: view logs
-        run: docker compose logs
+        run: docker-compose -f docker-compose.yml up -d
+      - name: View mysql logs
+        run: docker-compose -f docker-compose.yml logs mysql
+      - name: View app container logs
+        run: docker-compose -f docker-compose.yml logs app

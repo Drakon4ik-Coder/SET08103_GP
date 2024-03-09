@@ -1,38 +1,50 @@
 package com.napier.sem;
 
-import java.sql.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBReader {
-    private static String jdbcUrl = "jdbc:mysql://localhost:3306/world";
-    private static String username = "root";
-    private static String password = "1234";
+    private static final SessionFactory sessionFactory;
 
-    private static Connection connection = null;
-
-    public static List<List<String>> QueryDB(String sqlQuery) {
-        List<List<String>> results = new ArrayList<List<String>>();
+    static {
         try {
-            if (connection == null) {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection(jdbcUrl, username, password);
-            }
+            // Create the SessionFactory from hibernate.cfg.xml
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            int columnCount = resultSet.getMetaData().getColumnCount();
-            while (resultSet.next()) {
-                List<String> result = new ArrayList<>();
-                // Process the result set
-                for (int i = 1; i <= columnCount; i++) {
-                    result.add(resultSet.getString(i));
-                }
-                results.add(result);
-            }
-        } catch (ClassNotFoundException | SQLException e) {
+    public static List<Country> queryCountries(String hqlQuery, int limit) {
+        List<Country> results = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            results = session.createQuery(hqlQuery, Country.class)
+                    .setMaxResults(limit)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return results;
     }
+
+    public static List<City> queryCities(String hqlQuery, int limit) {
+        List<City> results = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            results = session.createQuery(hqlQuery, City.class)
+                    .setMaxResults(limit)
+                    .list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
+    }
+
 }
