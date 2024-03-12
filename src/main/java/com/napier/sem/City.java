@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "city")
 public class City {
     @Id
@@ -24,5 +25,25 @@ public class City {
 
     @Column(name = "Population")
     private int population;
+
+    @Override
+    public String toString(){
+        return "City{" +
+                "name='" + name + '\'' +
+                ", country='" + country.getName() + '\'' +
+                ", district='" + district + '\'' +
+                ", population=" + population +
+                '}';
+    }
+    public String toStringCapital(){
+        if (country.getCapital()==this) {
+            return "CapitalCity{" +
+                    "name='" + getName() + '\'' +
+                    ", country='" + getCountry().getName() + '\'' +
+                    ", population=" + getPopulation() +
+                    '}';
+        }
+        return toString();
+    }
 }
 
