@@ -72,7 +72,7 @@ public class Country {
                 ", localName='" + localName + '\'' +
                 ", governmentForm='" + governmentForm + '\'' +
                 ", headOfState='" + headOfState + '\'' +
-                ", capital=" + (capital != null ? capital.getName() : "null") + // Display capital information
+                ", capital=" + (capital != null ? capital.getName() : "null") + // Avoid exception if no capital defined in the DB
                 ", code2='" + code2 + '\'' +
                 '}';
     }

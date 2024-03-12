@@ -124,7 +124,7 @@ public class Main {
             String hqlQuery = "FROM Country WHERE continent = :continent ORDER BY population DESC";
             return DBReader.queryCountries(hqlQuery, limit, Continent.fromString(continent), "continent");
         }
-        catch (QueryArgumentException e) {
+        catch (IllegalArgumentException e) {
             System.out.println("Error: invalid continent name");
             return new ArrayList<Country>();
         }
