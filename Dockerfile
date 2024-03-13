@@ -13,7 +13,3 @@ COPY --from=build /app/target/SET08103_GP-1.0-SNAPSHOT-jar-with-dependencies.jar
 COPY --from=build /app/test_results.txt /app/test_results.txt
 COPY start.sh /app/start.sh
 ENTRYPOINT ["/app/start.sh"]
-#ENTRYPOINT ["cat", "/app/test_results.txt"]
-#ENTRYPOINT ["java", "-jar", "app/SET08103_GP-1.0-SNAPSHOT-jar-with-dependencies.jar"]
-#RUN java -jar /app/SET08103_GP-1.0-SNAPSHOT-jar-with-dependencies.jar
-#RUN cat /app/test_results.txt
