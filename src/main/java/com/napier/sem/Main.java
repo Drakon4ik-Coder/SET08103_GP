@@ -19,7 +19,7 @@ public class Main {
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
         }
-        System.out.println("\nCarribean region capital city population descending:");
+        System.out.println("\nCaribbean region capital city population descending:");
         capCities = DBReader.queryCities(Query.CapitalCity.getRegionDesc("Caribbean"), 10);
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
