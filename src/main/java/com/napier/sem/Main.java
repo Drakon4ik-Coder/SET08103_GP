@@ -39,6 +39,16 @@ public class Main {
         for (City city : citiesCountry) {
             System.out.println(city.toString());
         }
+
+        List<City> citiesRegion = DBReader.queryCities(Query.City.getRegionDesc("Polynesia"), 10);
+        for (City city : citiesRegion) {
+            System.out.println(city.toString());
+        }
+
+        List<City> citiesDistrict = DBReader.queryCities(Query.City.getDistrictDesc("Rajasthan"), 10);
+        for (City city : citiesDistrict) {
+            System.out.println(city.toString());
+        }
 //--
     }
 }
