@@ -1,9 +1,14 @@
 package com.napier.sem;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
 
 public class Main {
     public static void main(String[] args) {
+
+        LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
+
         System.out.println("World capital city population descending:");
         List<City> capCities = DBReader.queryCities(Query.CapitalCity.getWorldDesc(), 10);
         for (City capCity : capCities) {
