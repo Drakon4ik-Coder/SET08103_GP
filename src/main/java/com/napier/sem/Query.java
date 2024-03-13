@@ -25,7 +25,7 @@ public class Query {
         private static String CONTINENT_DESC = "FROM City c WHERE c.country.continent = '%s' ORDER BY c.population DESC";
         private static String COUNTRY_DESC = "FROM City c WHERE c.country.name = '%s' ORDER BY c.population DESC";
         private static String REGION_DESC = "FROM City c WHERE c.country.region = '%s' ORDER BY c.population DESC";
-        private static String DISTRICT_DESC = "FROM City c WHERE c.country.district = '%s' ORDER BY c.population DESC";
+        private static String DISTRICT_DESC = "FROM City c WHERE c.district = '%s' ORDER BY c.population DESC";
         public static String getWorldDesc() {
             return WORLD_DESC;
         }
