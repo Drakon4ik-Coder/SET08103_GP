@@ -11,5 +11,6 @@ RUN mvn -f /app/pom.xml clean package
 FROM openjdk:latest
 COPY --from=build /app/target/SET08103_GP-1.0-SNAPSHOT-jar-with-dependencies.jar /app/SET08103_GP-1.0-SNAPSHOT-jar-with-dependencies.jar
 COPY --from=build /app/test_results.txt /app/test_results.txt
-COPY start.sh /app/start.sh
-ENTRYPOINT ["/app/start.sh"]
+COPY start.sh start.sh
+RUN chmod +x start.sh
+ENTRYPOINT ["start.sh"]
