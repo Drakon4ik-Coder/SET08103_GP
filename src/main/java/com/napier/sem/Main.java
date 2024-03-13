@@ -8,13 +8,23 @@ public class Main {
     public static void main(String[] args) {
 
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
-
+//--Capital City
         System.out.println("World capital city population descending:");
         List<City> capCities = DBReader.queryCities(Query.CapitalCity.getWorldDesc(), 10);
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
         }
-
+        System.out.println("\nAsian continent capital city population descending:");
+        capCities = DBReader.queryCities(Query.CapitalCity.getContinentDesc(Continent.Asia), 10);
+        for (City capCity : capCities) {
+            System.out.println(capCity.toStringCapital());
+        }
+        System.out.println("\nCaribbean region capital city population descending:");
+        capCities = DBReader.queryCities(Query.CapitalCity.getRegionDesc("Caribbean"), 10);
+        for (City capCity : capCities) {
+            System.out.println(capCity.toStringCapital());
+        }
+//--City
         List<City> citiesWorld = DBReader.queryCities(Query.City.getWorldDesc(), 10);
         for (City city : citiesWorld) {
             System.out.println(city.toString());
@@ -29,18 +39,7 @@ public class Main {
         for (City city : citiesCountry) {
             System.out.println(city.toString());
         }
-
-        System.out.println("2");
-        System.out.println("\nAsian continent capital city population descending:");
-        capCities = DBReader.queryCities(Query.CapitalCity.getContinentDesc(Continent.Asia), 10);
-        for (City capCity : capCities) {
-            System.out.println(capCity.toStringCapital());
-        }
-        System.out.println("\nCaribbean region capital city population descending:");
-        capCities = DBReader.queryCities(Query.CapitalCity.getRegionDesc("Caribbean"), 10);
-        for (City capCity : capCities) {
-            System.out.println(capCity.toStringCapital());
-        }
+//--
     }
 }
 
