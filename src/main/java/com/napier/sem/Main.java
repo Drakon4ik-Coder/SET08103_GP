@@ -49,7 +49,22 @@ public class Main {
         for (City city : citiesDistrict) {
             System.out.println(city.toString());
         }
-//--
+//--Country
+        System.out.println("\nWorld country population descending:");
+        List<Country> Countries = DBReader.queryCountries(Query.Country.getWorldDesc(), 10);
+        for (Country c : Countries) {
+            System.out.println(c.toString());
+        }
+        System.out.println("\nAsian continent country population descending:");
+        Countries = DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), 10);
+        for (Country c : Countries) {
+            System.out.println(c.toString());
+        }
+        System.out.println("\nWestern Europe region country population descending:");
+        Countries = DBReader.queryCountries(Query.Country.getRegionDesc("Western Europe"), 10);
+        for (Country c : Countries) {
+            System.out.println(c.toString());
+        }
     }
 }
 
