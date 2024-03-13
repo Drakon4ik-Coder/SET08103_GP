@@ -22,6 +22,12 @@ jobs:
         run: docker-compose -f docker-compose.yml build
       - name: Run services
         run: docker-compose -f docker-compose.yml up -d
+      - name: Check exit code
+        run: |
+          exit_code=$(docker wait app)
+          if [ $exit_code -ne 0 ]; then
+            exit 1
+          fi
       - name: View mysql logs
         run: docker-compose -f docker-compose.yml logs mysql
       - name: View app container logs
