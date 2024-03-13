@@ -12,7 +12,7 @@ public class Query {
         public static String getWorldDesc(){
             return WORLD_DESC;
         }
-        public static String getContinentDesc(String continent){
+        public static String getContinentDesc(Continent continent){
             return String.format(CONTINENT_DESC, continent);
         }
 
