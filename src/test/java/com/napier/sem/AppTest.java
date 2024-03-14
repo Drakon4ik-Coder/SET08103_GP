@@ -18,4 +18,9 @@ public class AppTest {
     void country_report_for_world_test_negative_limit() {
         DBReader.queryCountries(Query.Country.getWorldDesc(), -1);
     }
+
+    @Test
+    void test() {
+        Assertions.assertEquals(5, 5);
+    }
 }
