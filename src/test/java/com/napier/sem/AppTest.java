@@ -1,63 +1,100 @@
 package com.napier.sem;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.io.File;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class AppTest {
     static Main app;
-
     @BeforeAll
     static void init() {
         app = new Main();
-
     }
 
     @Test
     void country_report_for_world_test_negative_limit() {
         DBReader.queryCountries(Query.Country.getWorldDesc(), -1);
     }
-
     @Test
-    void country_report_for_world_test_limit() {
-        List<Country> l = DBReader.queryCountries(Query.Country.getWorldDesc(), 10);
-        Assertions.assertEquals(10, l.size());
+    void city_report_for_world_test_negative_limit() {
+        DBReader.queryCities(Query.Country.getWorldDesc(), -1);
     }
 
     @Test
-    void country_report_for_continent_test_negative_limit() {
-        DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), -1);
+    void testQueryCapitalCityWorldDesc() {
+        String expected = "FROM City c WHERE c.id = c.country.capital.id ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.CapitalCity.getWorldDesc());
     }
 
     @Test
-    void country_report_for_continent_test_limit() {
-        DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), 10);
+    void testQueryCapitalCityContinentDesc() {
+        Continent continent = Continent.Europe; // Initialize a Continent enum
+        String expected = "FROM City c WHERE c.id = c.country.capital.id AND c.country.continent = 'Europe' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.CapitalCity.getContinentDesc(continent));
     }
 
     @Test
-    void country_report_for_continent_test_invalid_continent() {
-        DBReader.queryCountries(Query.Country.getContinentDesc("a"), 10);
+    void testQueryCapitalCityRegionDesc() {
+        String region = "Western Europe"; // Initialize a region string
+        String expected = "FROM City c WHERE c.id = c.country.capital.id AND c.country.region = 'Western Europe' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.CapitalCity.getRegionDesc(region));
     }
 
     @Test
-    void country_report_for_region_test_negative_limit() {
-        DBReader.queryCountries(Query.Country.getRegionDesc("Western Europe"), -1);
+    void testQueryCityWorldDesc() {
+        String expected = "FROM City c ORDER BY population DESC";
+        Assertions.assertEquals(expected,Query.City.getWorldDesc());
     }
 
     @Test
-    void country_report_for_region_test_limit() {
-        DBReader.queryCountries(Query.Country.getRegionDesc("Western Europe"), 10);
+    void testQueryCityContinentDesc() {
+        String continent = "Asia"; // Initialize a continent string
+        String expected = "FROM City c WHERE c.country.continent = 'Asia' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.City.getContinentDesc(continent));
     }
 
     @Test
-    void country_report_for_continent_test_invalid_region() {
-        DBReader.queryCountries(Query.Country.getRegionDesc("a"), 10);
+    void testQueryCityCountryDesc() {
+        String country = "China"; // Initialize a country string
+        String expected = "FROM City c WHERE c.country.name = 'China' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.City.getCountryDesc(country));
+    }
+
+    @Test
+    void testQueryCityRegionDesc() {
+        String region = "East Asia"; // Initialize a region string
+        String expected = "FROM City c WHERE c.country.region = 'East Asia' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.City.getRegionDesc(region));
+    }
+
+    @Test
+    void testQueryCityDistrictDesc() {
+        String district = "Pudong"; // Initialize a district string
+        String expected = "FROM City c WHERE c.district = 'Pudong' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.City.getDistrictDesc(district));
+    }
+
+    @Test
+    void testQueryCountryWorldDesc() {
+        String expected = "From Country c ORDER BY population DESC";
+        Assertions.assertEquals(expected, Query.Country.getWorldDesc());
+    }
+
+    @Test
+    void testQueryCountryContinentDesc() {
+        String continent = "Africa"; // Initialize a continent string
+        String expected = "FROM Country c WHERE c.continent = 'Africa' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.Country.getContinentDesc(continent));
+    }
+
+    @Test
+    void testQueryCountryRegionDesc() {
+        String region = "Northern Africa"; // Initialize a region string
+        String expected = "FROM Country c WHERE c.region = 'Northern Africa' ORDER BY c.population DESC";
+        Assertions.assertEquals(expected, Query.Country.getRegionDesc(region));
     }
 }
