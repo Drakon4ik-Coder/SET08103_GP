@@ -9,8 +9,7 @@ public class AppTest {
     static Main app;
 
     @BeforeAll
-    static void init()
-    {
+    static void init() {
         app = new Main();
     }
 
