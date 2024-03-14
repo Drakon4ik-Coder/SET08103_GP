@@ -7,8 +7,8 @@ COPY src /app/src
 RUN mvn -f /app/pom.xml clean
 RUN mvn -f /app/pom.xml compile
 RUN mvn surefire:test -f /app/pom.xml | tee /app/test_results.txt  # Capture test results to a file
-RUN mvn org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test -f /app/pom.xml
-RUN mvn -f /app/pom.xml clean package > /app/test_results.txt
+RUN mvn org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test -f /app/pom.xml | tee /app/test_results.txt
+RUN mvn -f /app/pom.xml clean package
 
 # Run stage
 FROM openjdk:latest
