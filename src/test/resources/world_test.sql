@@ -1,54 +1,49 @@
--- MySQL dump 10.13  Distrib 8.0.19, for osx10.14 (x86_64)
---
--- Host: 127.0.0.1    Database: world
--- ------------------------------------------------------
--- Server version	8.0.19-debug
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @old_autocommit=@@autocommit;
 
---
--- Current Database: `world`
---
+CREATE SCHEMA IF NOT EXISTS world;
 
-/*!40000 DROP DATABASE IF EXISTS `world`*/;
+SET DATABASE SQL SYNTAX MYS TRUE;
 
-CREATE DATABASE `world` DEFAULT CHARACTER SET utf8mb4;
+SET MODE MYSQL;
 
-USE `world`;
 
---
--- Table structure for table `city`
---
+CREATE TABLE world.city (
+  ID INT IDENTITY NOT NULL PRIMARY KEY,
+  Name VARCHAR(35) NOT NULL DEFAULT '',
+  CountryCode CHAR(3) NOT NULL DEFAULT '',
+  District VARCHAR(20) NOT NULL DEFAULT '',
+  Population INT NOT NULL DEFAULT '0',
+  FOREIGN KEY (CountryCode) REFERENCES world.country (Code)
+);
 
-DROP TABLE IF EXISTS `city`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `city` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `Name` char(35) NOT NULL DEFAULT '',
-  `CountryCode` char(3) NOT NULL DEFAULT '',
-  `District` char(20) NOT NULL DEFAULT '',
-  `Population` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `CountryCode` (`CountryCode`),
-  CONSTRAINT `city_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
+CREATE TABLE world.country (
+  Code CHAR(3) NOT NULL DEFAULT '',
+  Name VARCHAR(52) NOT NULL DEFAULT '',
+  Continent VARCHAR(20) NOT NULL DEFAULT 'Asia',
+  Region VARCHAR(26) NOT NULL DEFAULT '',
+  SurfaceArea DECIMAL(10,2) NOT NULL DEFAULT '0.00',
+  IndepYear SMALLINT,
+  Population INT NOT NULL DEFAULT '0',
+  LifeExpectancy DECIMAL(3,1),
+  GNP DECIMAL(10,2),
+  GNPOld DECIMAL(10,2),
+  LocalName VARCHAR(45) NOT NULL DEFAULT '',
+  GovernmentForm VARCHAR(45) NOT NULL DEFAULT '',
+  HeadOfState VARCHAR(60),
+  Capital INT,
+  Code2 CHAR(2) NOT NULL DEFAULT '',
+  PRIMARY KEY (Code)
+);
 
---
--- Dumping data for table `city`
---
--- ORDER BY:  `ID`
+CREATE TABLE world.countrylanguage (
+  CountryCode CHAR(3) NOT NULL DEFAULT '',
+  Language VARCHAR(30) NOT NULL DEFAULT '',
+  IsOfficial CHAR(1) NOT NULL DEFAULT 'F',
+  Percentage DECIMAL(4,1) NOT NULL DEFAULT '0.0',
+  PRIMARY KEY (CountryCode, Language),
+  FOREIGN KEY (CountryCode) REFERENCES world.country (Code)
+);
+
 
 set autocommit=0;
 INSERT INTO `city` VALUES (1,'Kabul','AFG','Kabol',1780000);
@@ -4132,32 +4127,6 @@ INSERT INTO `city` VALUES (4078,'Nablus','PSE','Nablus',100231);
 INSERT INTO `city` VALUES (4079,'Rafah','PSE','Rafah',92020);
 commit;
 
---
--- Table structure for table `country`
---
-
-DROP TABLE IF EXISTS `country`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `country` (
-  `Code` char(3) NOT NULL DEFAULT '',
-  `Name` char(52) NOT NULL DEFAULT '',
-  `Continent` enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') NOT NULL DEFAULT 'Asia',
-  `Region` char(26) NOT NULL DEFAULT '',
-  `SurfaceArea` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `IndepYear` smallint DEFAULT NULL,
-  `Population` int NOT NULL DEFAULT '0',
-  `LifeExpectancy` decimal(3,1) DEFAULT NULL,
-  `GNP` decimal(10,2) DEFAULT NULL,
-  `GNPOld` decimal(10,2) DEFAULT NULL,
-  `LocalName` char(45) NOT NULL DEFAULT '',
-  `GovernmentForm` char(45) NOT NULL DEFAULT '',
-  `HeadOfState` char(60) DEFAULT NULL,
-  `Capital` int DEFAULT NULL,
-  `Code2` char(2) NOT NULL DEFAULT '',
-  PRIMARY KEY (`Code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `country`
@@ -4206,7 +4175,7 @@ INSERT INTO `country` VALUES ('CAN','Canada','North America','North America',997
 INSERT INTO `country` VALUES ('CCK','Cocos (Keeling) Islands','Oceania','Australia and New Zealand',14.00,NULL,600,NULL,0.00,NULL,'Cocos (Keeling) Islands','Territory of Australia','Elisabeth II',2317,'CC');
 INSERT INTO `country` VALUES ('CHE','Switzerland','Europe','Western Europe',41284.00,1499,7160400,79.6,264478.00,256092.00,'Schweiz/Suisse/Svizzera/Svizra','Federation','Adolf Ogi',3248,'CH');
 INSERT INTO `country` VALUES ('CHL','Chile','South America','South America',756626.00,1810,15211000,75.7,72949.00,75780.00,'Chile','Republic','Ricardo Lagos Escobar',554,'CL');
-INSERT INTO `country` VALUES ('CHN','China','Asia','Eastern Asia',9572900.00,-1523,1277558000,71.4,982268.00,917719.00,'Zhongquo','People\'sRepublic','Jiang Zemin',1891,'CN');
+INSERT INTO `country` VALUES ('CHN','China','Asia','Eastern Asia',9572900.00,-1523,1277558000,71.4,982268.00,917719.00,'Zhongquo','People\`sRepublic','Jiang Zemin',1891,'CN');
 INSERT INTO `country` VALUES ('CIV','Côte d’Ivoire','Africa','Western Africa',322463.00,1960,14786000,45.2,11345.00,10285.00,'Côte d’Ivoire','Republic','Laurent Gbagbo',2814,'CI');
 INSERT INTO `country` VALUES ('CMR','Cameroon','Africa','Central Africa',475442.00,1960,15085000,54.8,9174.00,8596.00,'Cameroun/Cameroon','Republic','Paul Biya',1804,'CM');
 INSERT INTO `country` VALUES ('COD','Congo, The Democratic Republic of the','Africa','Central Africa',2344858.00,1960,51654000,48.8,6964.00,2474.00,'République Démocratique du Congo','Republic','Joseph Kabila',2298,'CD');
@@ -4377,7 +4346,7 @@ INSERT INTO `country` VALUES ('TJK','Tajikistan','Asia','Southern and Central As
 INSERT INTO `country` VALUES ('TKL','Tokelau','Oceania','Polynesia',12.00,NULL,2000,NULL,0.00,NULL,'Tokelau','Nonmetropolitan Territory of New Zealand','Elisabeth II',3333,'TK');
 INSERT INTO `country` VALUES ('TKM','Turkmenistan','Asia','Southern and Central Asia',488100.00,1991,4459000,60.9,4397.00,2000.00,'Türkmenostan','Republic','Saparmurad Nijazov',3419,'TM');
 INSERT INTO `country` VALUES ('TMP','East Timor','Asia','Southeast Asia',14874.00,NULL,885000,46.0,0.00,NULL,'Timor Timur','Administrated by the UN','José Alexandre Gusmão',1522,'TP');
-INSERT INTO `country` VALUES ('TON','Tonga','Oceania','Polynesia',650.00,1970,99000,67.9,146.00,170.00,'Tonga','Monarchy','Taufa\'ahau Tupou IV',3334,'TO');
+INSERT INTO `country` VALUES ('TON','Tonga','Oceania','Polynesia',650.00,1970,99000,67.9,146.00,170.00,'Tonga','Monarchy','Taufa\`ahau Tupou IV',3334,'TO');
 INSERT INTO `country` VALUES ('TTO','Trinidad and Tobago','North America','Caribbean',5130.00,1962,1295000,68.0,6232.00,5867.00,'Trinidad and Tobago','Republic','Arthur N. R. Robinson',3336,'TT');
 INSERT INTO `country` VALUES ('TUN','Tunisia','Africa','Northern Africa',163610.00,1956,9586000,73.7,20026.00,18898.00,'Tunis/Tunisie','Republic','Zine al-Abidine Ben Ali',3349,'TN');
 INSERT INTO `country` VALUES ('TUR','Turkey','Asia','Middle East',774815.00,1923,66591000,71.0,210721.00,189122.00,'Türkiye','Republic','Ahmet Necdet Sezer',3358,'TR');
@@ -4406,28 +4375,6 @@ INSERT INTO `country` VALUES ('ZMB','Zambia','Africa','Eastern Africa',752618.00
 INSERT INTO `country` VALUES ('ZWE','Zimbabwe','Africa','Eastern Africa',390757.00,1980,11669000,37.8,5951.00,8670.00,'Zimbabwe','Republic','Robert G. Mugabe',4068,'ZW');
 commit;
 
---
--- Table structure for table `countrylanguage`
---
-
-DROP TABLE IF EXISTS `countrylanguage`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `countrylanguage` (
-  `CountryCode` char(3) NOT NULL DEFAULT '',
-  `Language` char(30) NOT NULL DEFAULT '',
-  `IsOfficial` enum('T','F') NOT NULL DEFAULT 'F',
-  `Percentage` decimal(4,1) NOT NULL DEFAULT '0.0',
-  PRIMARY KEY (`CountryCode`,`Language`),
-  KEY `CountryCode` (`CountryCode`),
-  CONSTRAINT `countryLanguage_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `countrylanguage`
---
--- ORDER BY:  `CountryCode`,`Language`
 
 set autocommit=0;
 INSERT INTO `countrylanguage` VALUES ('ABW','Dutch','T',5.3);
@@ -5416,22 +5363,3 @@ INSERT INTO `countrylanguage` VALUES ('ZWE','Nyanja','F',2.2);
 INSERT INTO `countrylanguage` VALUES ('ZWE','Shona','F',72.1);
 commit;
 
---
--- Dumping events for database 'world'
---
-
---
--- Dumping routines for database 'world'
---
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-SET autocommit=@old_autocommit;
-
--- Dump completed on 2020-01-22  9:56:18

@@ -24,7 +24,7 @@ public class DBReader {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<Country> results = session.createQuery(hqlQuery, Country.class);
-            if (limit != 0)
+            if (limit > 0)
             {
                 results = results.setMaxResults(limit);
             }
@@ -40,7 +40,7 @@ public class DBReader {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<City> results = session.createQuery(hqlQuery, City.class);
-            if (limit != 0)
+            if (limit > 0)
             {
                 results = results.setMaxResults(limit);
             }
