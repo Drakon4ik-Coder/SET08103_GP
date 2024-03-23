@@ -77,18 +77,83 @@ public class AppTest {
     }
 
     @Test
-    void country_report_for_world_test_negative_limit() {
+    void testCountryWorldNegativeLimit() {
         List<Country> c = DBReader.queryCountries(Query.Country.getWorldDesc(), -1);
         Assertions.assertEquals(2, c.size());
     }
+
     @Test
-    void city_report_for_world_test_negative_limit() {
+    void testCountryWorldNoLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getWorldDesc(), 0);
+        Assertions.assertEquals(2, c.size());
+    }
+
+    @Test
+    void testCountryWorldLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getWorldDesc(), 1);
+        Assertions.assertEquals(1, c.size());
+        Assertions.assertEquals("Country 2", c.get(0).getName());
+    }
+
+    @Test
+    void testCountryContinentNegativeLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), -1);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testCountryContinentNoLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), 0);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testCountryContinentLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), 1);
+        Assertions.assertEquals(1, c.size());
+        Assertions.assertEquals("Country 1", c.get(0).getName());
+    }
+
+    @Test
+    void testCountryRegionNegativeLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getRegionDesc("Region 1"), -1);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testCountryRegionNoLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getRegionDesc("Region 1"), 0);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testCountryRegionLimit() {
+        List<Country> c = DBReader.queryCountries(Query.Country.getRegionDesc("Region 1"), 1);
+        Assertions.assertEquals(1, c.size());
+        Assertions.assertEquals("Country 1", c.get(0).getName());
+    }
+
+    @Test
+    void testCityWorldNegativeLimit() {
         List<City> c = DBReader.queryCities(Query.Country.getWorldDesc(), -1);
         Assertions.assertEquals(2, c.size());
     }
 
     @Test
-    void testQueryCapitalCityWorldDesc() {
+    void testCityWorldNoLimit() {
+        List<City> c = DBReader.queryCities(Query.Country.getWorldDesc(), 0);
+        Assertions.assertEquals(2, c.size());
+    }
+
+    @Test
+    void testCityWorldLimit() {
+        List<City> c = DBReader.queryCities(Query.City.getWorldDesc(), 1);
+        Assertions.assertEquals(1, c.size());
+        Assertions.assertEquals("City 2", c.get(0).getName());
+    }
+
+    @Test
+    void testCapitalCityWorldLimit() {
         //String expected = "FROM City c WHERE c.id = c.country.capital.id ORDER BY c.population DESC";
         List<City> c = DBReader.queryCities(Query.CapitalCity.getWorldDesc(), 0);
         Assertions.assertEquals(2, c.size());
