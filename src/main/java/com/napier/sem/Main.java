@@ -10,58 +10,58 @@ public class Main {
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
 //--Capital City
         System.out.println("World capital city population descending:");
-        List<City> capCities = DBReader.queryCities(Query.CapitalCity.getWorldDesc(), 10);
+        List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, 10);
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
         }
         System.out.println("\nAsian continent capital city population descending:");
-        capCities = DBReader.queryCities(Query.CapitalCity.getContinentDesc(Continent.Asia), 10);
+        capCities = DBReader.queryDB(Query.CapitalCity.CONTINENT_DESC, 10, Continent.Asia.name());
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
         }
         System.out.println("\nCaribbean region capital city population descending:");
-        capCities = DBReader.queryCities(Query.CapitalCity.getRegionDesc("Caribbean"), 10);
+        capCities = DBReader.queryDB(Query.CapitalCity.REGION_DESC,10, "Caribbean");
         for (City capCity : capCities) {
             System.out.println(capCity.toStringCapital());
         }
 //--City
-        List<City> citiesWorld = DBReader.queryCities(Query.City.getWorldDesc(), 10);
+        List<City> citiesWorld = DBReader.queryDB(Query.City.WORLD_DESC, 10);
         for (City city : citiesWorld) {
             System.out.println(city.toString());
         }
 
-        List<City> citiesContinent = DBReader.queryCities(Query.City.getContinentDesc("Asia"), 10);
+        List<City> citiesContinent = DBReader.queryDB(Query.City.CONTINENT_DESC, 10, Continent.Asia.name());
         for (City city : citiesContinent) {
             System.out.println(city.toString());
         }
 
-        List<City> citiesCountry = DBReader.queryCities(Query.City.getCountryDesc("France"), 10);
+        List<City> citiesCountry = DBReader.queryDB(Query.City.COUNTRY_DESC, 10, "France");
         for (City city : citiesCountry) {
             System.out.println(city.toString());
         }
 
-        List<City> citiesRegion = DBReader.queryCities(Query.City.getRegionDesc("Polynesia"), 10);
+        List<City> citiesRegion = DBReader.queryDB(Query.City.REGION_DESC, 10, "Polynesia");
         for (City city : citiesRegion) {
             System.out.println(city.toString());
         }
 
-        List<City> citiesDistrict = DBReader.queryCities(Query.City.getDistrictDesc("Rajasthan"), 10);
+        List<City> citiesDistrict = DBReader.queryDB(Query.City.DISTRICT_DESC, 10, "Rajasthan");
         for (City city : citiesDistrict) {
             System.out.println(city.toString());
         }
 //--Country
         System.out.println("\nWorld country population descending:");
-        List<Country> Countries = DBReader.queryCountries(Query.Country.getWorldDesc(), 10);
+        List<Country> Countries = DBReader.queryDB(Query.Country.WORLD_DESC, 10);
         for (Country c : Countries) {
             System.out.println(c.toString());
         }
         System.out.println("\nAsian continent country population descending:");
-        Countries = DBReader.queryCountries(Query.Country.getContinentDesc("Asia"), 10);
+        Countries = DBReader.queryDB(Query.Country.CONTINENT_DESC, 10, Continent.Asia.name());
         for (Country c : Countries) {
             System.out.println(c.toString());
         }
         System.out.println("\nWestern Europe region country population descending:");
-        Countries = DBReader.queryCountries(Query.Country.getRegionDesc("Western Europe"), 10);
+        Countries = DBReader.queryDB(Query.Country.REGION_DESC, 10, "Western Europe");
         for (Country c : Countries) {
             System.out.println(c.toString());
         }
