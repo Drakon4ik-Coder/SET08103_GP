@@ -279,5 +279,11 @@ public class AppTest {
         Assertions.assertEquals(1, c.size());
     }
 
+    @Test
+    void testDBReaderQuery() {
+        List<City> c = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, 0);
+        Assertions.assertEquals(2, c.size());
+    }
+
 }
 
