@@ -24,5 +24,8 @@ abstract class Query {
         public static final QueryString REGION_DESC = new QueryString("FROM Country c WHERE c.region = '%s' ORDER BY c.population DESC", QueryType.COUNTRY);
     }
 
+    abstract static class Population {
+        public static final QueryString WORLD = new QueryString("SELECT 'world' as reportName, SUM(population) as total, SUM(population) as city, SUM(population) as notCity FROM Country", QueryType.POPULATION);
+    }
 
 }

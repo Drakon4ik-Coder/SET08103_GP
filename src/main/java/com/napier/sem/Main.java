@@ -65,6 +65,11 @@ public class Main {
         for (Country c : Countries) {
             System.out.println(c.toString());
         }
+
+        List<Population> Populations = DBReader.queryDB(Query.Population.WORLD, 0);
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
     }
 }
 

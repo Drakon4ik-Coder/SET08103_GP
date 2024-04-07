@@ -36,6 +36,7 @@ public class DBReader {
             session.getTransaction().commit();
             return results.list();
         } catch (Exception e) {
+            System.out.println(e);
             e.printStackTrace();
         }
         return null;

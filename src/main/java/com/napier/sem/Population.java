@@ -3,30 +3,37 @@ package com.napier.sem;
 import lombok.Getter;
 import lombok.Setter;
 
-public class PopulationReport {
+public class Population {
     @Getter
     @Setter
     private String reportName;
     @Getter
     @Setter
-    private int totalPopulation;
+    private long totalPopulation;
     @Getter
     @Setter
-    private int cityPopulation;
+    private long cityPopulation;
     @Getter
     @Setter
-    private int notCityPopulation;
+    private long notCityPopulation;
 
-    int getCityPercentage() {
+    public Population(java.lang.String name, java.lang.Long total, java.lang.Long city, java.lang.Long notCity) {
+        reportName=name;
+        totalPopulation=total;
+        cityPopulation=city;
+        notCityPopulation=notCity;
+    }
+
+    long getCityPercentage() {
         return cityPopulation/totalPopulation*100;
     }
-    int getNotCityPercentage() {
+    long getNotCityPercentage() {
         return notCityPopulation/totalPopulation*100;
     }
 
     @Override
     public String toString(){
-        return "City{" +
+        return "population{" +
                 "name='" + reportName +
                 ", total=" + totalPopulation +
                 ", city=" + cityPopulation + "(" +getCityPercentage()+"%)"+
