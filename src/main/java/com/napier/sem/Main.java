@@ -70,6 +70,10 @@ public class Main {
         for (Population p: Populations) {
             System.out.println(p.toString());
         }
+        Populations = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
     }
 }
 

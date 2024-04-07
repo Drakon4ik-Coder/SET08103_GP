@@ -287,7 +287,13 @@ public class AppTest {
 
     @Test
     void testPopulationWorld() {
-        List<City> c = DBReader.queryDB(Query.Population.WORLD, 0);
+        List<Population> c = DBReader.queryDB(Query.Population.WORLD, 0);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testPopulationContinent() {
+        List<Population> c = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
         Assertions.assertEquals(1, c.size());
     }
 }

@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DBReader {
@@ -22,7 +23,12 @@ public class DBReader {
 
     public static <T> List<T> queryDB(QueryString query, int limit, String ... queryParam) {
         String hqlQuery = query.getQuery();
-        if(queryParam.length != 0) {
+        if(queryParam.length == 1) {
+            int count = hqlQuery.split("%s", -1).length - 1;
+            String[] queryArgs = new String[count];
+            Arrays.fill(queryArgs, queryParam[0]);
+            hqlQuery = String.format(hqlQuery, queryArgs);
+        } else if (queryParam.length > 1) {
             hqlQuery = String.format(hqlQuery, queryParam);
         }
 

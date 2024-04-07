@@ -33,7 +33,7 @@ public class Population {
 
     @Override
     public String toString(){
-        return "population{" +
+        return "Population{" +
                 "name='" + reportName +
                 ", total=" + totalPopulation +
                 ", city=" + cityPopulation + "(" +getCityPercentage()+"%)"+
