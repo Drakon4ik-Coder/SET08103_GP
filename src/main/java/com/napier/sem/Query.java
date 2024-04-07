@@ -25,7 +25,7 @@ abstract class Query {
     }
 
     abstract static class Population {
-        public static final QueryString WORLD = new QueryString("SELECT 'world' as reportName, SUM(population) as total, SUM(population) as city, SUM(population) as notCity FROM Country", QueryType.POPULATION);
+        public static final QueryString WORLD = new QueryString("SELECT 'world' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country) r1, (SELECT SUM(population) as sum FROM City) r2", QueryType.POPULATION);
     }
 
 }
