@@ -24,11 +24,11 @@ public class Population {
         notCityPopulation=notCity;
     }
 
-    long getCityPercentage() {
-        return cityPopulation/totalPopulation*100;
+    int getCityPercentage() {
+        return (int)(((double)cityPopulation/totalPopulation)*100);
     }
-    long getNotCityPercentage() {
-        return notCityPopulation/totalPopulation*100;
+    int getNotCityPercentage() {
+        return (int)(((double)notCityPopulation/totalPopulation)*100);
     }
 
     @Override
