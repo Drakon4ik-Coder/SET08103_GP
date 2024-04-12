@@ -67,7 +67,7 @@ public class Main {
         }
 //--Language
         System.out.println("\nLanguage report with the number of speakers and percentage of world population (in descending order):");
-        List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 10, "", Continent.Asia.name());
+        List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
         for (Object[] row : languageSpeakers) {
             String language = (String) row[0];
             if (language.equals("Chinese") || language.equals("English") || language.equals("Hindi") || language.equals("Spanish") || language.equals("Arabic")) {
