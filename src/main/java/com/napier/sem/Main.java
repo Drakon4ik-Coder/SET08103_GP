@@ -65,6 +65,17 @@ public class Main {
         for (Country c : Countries) {
             System.out.println(c.toString());
         }
+//--Language
+        System.out.println("\nLanguage report with the number of speakers and percentage of world population (in descending order):");
+        List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 10, "", Continent.Asia.name());
+        for (Object[] row : languageSpeakers) {
+            String language = (String) row[0];
+            if (language.equals("Chinese") || language.equals("English") || language.equals("Hindi") || language.equals("Spanish") || language.equals("Arabic")) {
+                Double totalSpeakers = (Double) row[1];
+                Double percentageOfWorldPopulation = (Double) row[2];
+                System.out.printf("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
+            }
+        }
     }
 }
 
