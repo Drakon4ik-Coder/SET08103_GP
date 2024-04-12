@@ -19,6 +19,7 @@ public class DBReader {
         }
     }
 
+    // Method for queries that return ORM entities
     public static <T> List<T> queryDB(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
         if (queryParam.length != 0) {
@@ -39,6 +40,7 @@ public class DBReader {
         return null;
     }
 
+    // Method for non-entity queries
     public static List<Object[]> queryDBNonEntity(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
         if (queryParam.length != 0) {
