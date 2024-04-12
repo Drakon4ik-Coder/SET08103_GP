@@ -316,9 +316,20 @@ public class AppTest {
     }
 
     @Test
-    void testLanguageReport() {
+    void testDBReaderNonEntityQuery() {
         List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
         Assertions.assertEquals(3, l.size());
+    }
+
+    @Test
+    void testDBReaderNonEntityQueryLimit() {
+        List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 1, "");
+        Assertions.assertEquals(1, l.size());
+    }
+
+    @Test
+    void testLanguageReport() {
+        List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
         for (Object[] row : l) {
             String language = (String) row[0];
             Double totalSpeakers = (Double) row[1];
