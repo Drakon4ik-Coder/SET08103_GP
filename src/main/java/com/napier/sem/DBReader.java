@@ -20,10 +20,15 @@ public class DBReader {
         }
     }
 
-    public static List<Country> queryCountries(String hqlQuery, int limit) {
+    public static <T> List<T> queryDB(QueryString query, int limit, String ... queryParam) {
+        String hqlQuery = query.getQuery();
+        if(queryParam.length != 0) {
+            hqlQuery = String.format(hqlQuery, queryParam);
+        }
+
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            Query<Country> results = session.createQuery(hqlQuery, Country.class);
+            Query<T> results = session.createQuery(hqlQuery, query.getType().queryClass);
             if (limit > 0)
             {
                 results = results.setMaxResults(limit);
@@ -35,21 +40,4 @@ public class DBReader {
         }
         return null;
     }
-
-    public static List<City> queryCities(String hqlQuery, int limit) {
-        try (Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Query<City> results = session.createQuery(hqlQuery, City.class);
-            if (limit > 0)
-            {
-                results = results.setMaxResults(limit);
-            }
-            session.getTransaction().commit();
-            return results.list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

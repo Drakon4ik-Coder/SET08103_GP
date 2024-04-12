@@ -1,69 +1,27 @@
 package com.napier.sem;
 
-public class Query {
+abstract class Query {
     private Query(){
 
     }
-    public static class CapitalCity {
-        private static String WORLD_DESC = "FROM City c WHERE c.id = c.country.capital.id ORDER BY c.population DESC";
-        private static String CONTINENT_DESC = "FROM City c WHERE c.id = c.country.capital.id AND c.country.continent = '%s' ORDER BY c.population DESC";
-        private static String REGION_DESC = "FROM City c WHERE c.id = c.country.capital.id AND c.country.region = '%s' ORDER BY c.population DESC";
-
-        public static String getWorldDesc(){
-            return WORLD_DESC;
-        }
-        public static String getContinentDesc(Continent continent){
-            return String.format(CONTINENT_DESC, continent);
-        }
-
-        public static String getRegionDesc(String region){
-            return String.format(REGION_DESC, region);
-        }
+    abstract static class CapitalCity {
+        public static final QueryString WORLD_DESC = new QueryString("FROM City c WHERE c.id = c.country.capital.id ORDER BY c.population DESC", QueryType.CAPITAL_CITY);
+        public static final QueryString CONTINENT_DESC = new QueryString("FROM City c WHERE c.id = c.country.capital.id AND c.country.continent = '%s' ORDER BY c.population DESC", QueryType.CAPITAL_CITY);
+        public static final QueryString REGION_DESC = new QueryString("FROM City c WHERE c.id = c.country.capital.id AND c.country.region = '%s' ORDER BY c.population DESC", QueryType.CAPITAL_CITY);
     }
-    public static class City {
-        private static String WORLD_DESC = "FROM City c ORDER BY population DESC";
-        private static String CONTINENT_DESC = "FROM City c WHERE c.country.continent = '%s' ORDER BY c.population DESC";
-        private static String COUNTRY_DESC = "FROM City c WHERE c.country.name = '%s' ORDER BY c.population DESC";
-        private static String REGION_DESC = "FROM City c WHERE c.country.region = '%s' ORDER BY c.population DESC";
-        private static String DISTRICT_DESC = "FROM City c WHERE c.district = '%s' ORDER BY c.population DESC";
-        public static String getWorldDesc() {
-            return WORLD_DESC;
-        }
-
-        public static String getContinentDesc(String continent) {
-            return String.format(CONTINENT_DESC, continent);
-        }
-
-        public static String getCountryDesc(String country) {
-            return String.format(COUNTRY_DESC, country);
-        }
-
-        public static String getRegionDesc(String region){
-            return String.format(REGION_DESC, region);
-        }
-
-        public static String getDistrictDesc(String district){
-            return String.format(DISTRICT_DESC, district);
-        }
+    abstract static class City {
+        public static final QueryString WORLD_DESC = new QueryString("FROM City c ORDER BY population DESC", QueryType.CITY);
+        public static final QueryString CONTINENT_DESC = new QueryString("FROM City c WHERE c.country.continent = '%s' ORDER BY c.population DESC", QueryType.CITY);
+        public static final QueryString COUNTRY_DESC = new QueryString("FROM City c WHERE c.country.name = '%s' ORDER BY c.population DESC", QueryType.CITY);
+        public static final QueryString REGION_DESC = new QueryString("FROM City c WHERE c.country.region = '%s' ORDER BY c.population DESC", QueryType.CITY);
+        public static final QueryString DISTRICT_DESC = new QueryString("FROM City c WHERE c.district = '%s' ORDER BY c.population DESC", QueryType.CITY);
 
     }
 
-    public static class Country {
-        private static String WORLD_DESC = "From Country c ORDER BY population DESC";
-        private static String CONTINENT_DESC = "FROM Country c WHERE c.continent = '%s' ORDER BY c.population DESC";
-        private static String REGION_DESC = "FROM Country c WHERE c.region = '%s' ORDER BY c.population DESC";
-
-        public static String getWorldDesc() {
-            return WORLD_DESC;
-        }
-
-        public static String getContinentDesc(String continent) {
-            return String.format(CONTINENT_DESC, continent);
-        }
-
-        public static String getRegionDesc(String region){
-            return String.format(REGION_DESC, region);
-        }
+    abstract static class Country {
+        public static final QueryString WORLD_DESC = new QueryString("From Country c ORDER BY population DESC", QueryType.COUNTRY);
+        public static final QueryString CONTINENT_DESC = new QueryString("FROM Country c WHERE c.continent = '%s' ORDER BY c.population DESC", QueryType.COUNTRY);
+        public static final QueryString REGION_DESC = new QueryString("FROM Country c WHERE c.region = '%s' ORDER BY c.population DESC", QueryType.COUNTRY);
     }
 
 
