@@ -302,5 +302,20 @@ public class AppTest {
         List<Population> c = DBReader.queryDB(Query.Population.COUNTRY, 0, "Country 1");
         Assertions.assertEquals(1, c.size());
     }
+    @Test
+    void testPopulationDistrict() {
+        List<Population> c = DBReader.queryDB(Query.Population.DISTRICT, 0, "District 1");
+        Assertions.assertEquals(1, c.size());
+    }
+    @Test
+    void testPopulationRegion() {
+        List<Population> c = DBReader.queryDB(Query.Population.REGION, 0, "Region 1");
+        Assertions.assertEquals(1, c.size());
+    }
+    @Test
+    void testPopulationCity() {
+        List<Population> c = DBReader.queryDB(Query.Population.CITY, 0, "City 1");
+        Assertions.assertEquals(1, c.size());
+    }
 }
 

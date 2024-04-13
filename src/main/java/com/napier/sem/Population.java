@@ -24,6 +24,13 @@ public class Population {
         notCityPopulation=notCity;
     }
 
+    public Population(java.lang.String name, java.lang.Long total, java.lang.Long city, java.lang.Integer notCity) {
+        reportName=name;
+        totalPopulation=total;
+        cityPopulation=city;
+        notCityPopulation=notCity;
+    }
+
     int getCityPercentage() {
         return (int)(((double)cityPopulation/totalPopulation)*100);
     }

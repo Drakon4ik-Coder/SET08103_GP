@@ -78,6 +78,18 @@ public class Main {
         for (Population p: Populations) {
             System.out.println(p.toString());
         }
+        Populations = DBReader.queryDB(Query.Population.REGION, 0, "Western Europe");
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.DISTRICT, 0, "Kiova");
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.CITY, 0, "Kyiv");
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
     }
 }
 
