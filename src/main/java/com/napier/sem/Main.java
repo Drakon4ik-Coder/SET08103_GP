@@ -74,6 +74,10 @@ public class Main {
         for (Population p: Populations) {
             System.out.println(p.toString());
         }
+        Populations = DBReader.queryDB(Query.Population.COUNTRY, 0, "Ukraine");
+        for (Population p: Populations) {
+            System.out.println(p.toString());
+        }
     }
 }
 

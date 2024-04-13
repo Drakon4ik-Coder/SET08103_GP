@@ -296,5 +296,11 @@ public class AppTest {
         List<Population> c = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
         Assertions.assertEquals(1, c.size());
     }
+
+    @Test
+    void testPopulationCountry() {
+        List<Population> c = DBReader.queryDB(Query.Population.COUNTRY, 0, "Country 1");
+        Assertions.assertEquals(1, c.size());
+    }
 }
 
