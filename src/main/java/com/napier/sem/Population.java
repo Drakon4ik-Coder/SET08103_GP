@@ -32,6 +32,7 @@ public class Population {
     }
 
     int getCityPercentage() {
+        if(notCityPopulation == -1) { return 100; }
         return (int)(((double)cityPopulation/totalPopulation)*100);
     }
     int getNotCityPercentage() {
@@ -40,12 +41,19 @@ public class Population {
 
     @Override
     public String toString(){
-        return "Population{" +
+        String ret = "Population{" +
                 "name='" + reportName + '\'' +
                 ", total=" + totalPopulation +
                 ", city=" + cityPopulation + "(" +getCityPercentage()+"%)"+
-                ", notCity=" + notCityPopulation + "(" +getNotCityPercentage()+"%)"+
-                '}';
+                ", notCity=";
+        if(notCityPopulation != -1){
+            ret += notCityPopulation + "(" +getNotCityPercentage()+"%)";
+        }
+        else {
+            ret += "Not Enough Data";
+        }
+        ret += '}';
+        return ret;
     }
 
 }
