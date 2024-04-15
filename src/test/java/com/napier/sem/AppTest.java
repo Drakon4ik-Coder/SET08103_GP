@@ -347,6 +347,7 @@ public class AppTest {
             }
         }
     }
+    @Test
     void testPopulationWorld() {
         List<Population> c = DBReader.queryDB(Query.Population.WORLD, 0);
         Assertions.assertEquals(1, c.size());
