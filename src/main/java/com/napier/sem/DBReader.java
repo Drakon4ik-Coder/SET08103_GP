@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +20,8 @@ public class DBReader {
         }
     }
 
-    public static <T> List<T> queryDB(QueryString query, int limit, String ... queryParam) {
+    // Method for queries that return ORM entities
+    public static <T> List<T> queryDB(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
         if(queryParam.length == 1) {
             int count = hqlQuery.split("%s", -1).length - 1;
@@ -35,8 +35,28 @@ public class DBReader {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Query<T> results = session.createQuery(hqlQuery, query.getType().queryClass);
-            if (limit > 0)
-            {
+            if (limit > 0) {
+                results = results.setMaxResults(limit);
+            }
+            session.getTransaction().commit();
+            return results.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // Method for non-entity queries
+    public static List<Object[]> queryDBNonEntity(QueryString query, int limit, String... queryParam) {
+        String hqlQuery = query.getQuery();
+        if (queryParam.length != 0) {
+            hqlQuery = String.format(hqlQuery, queryParam);
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            Query<Object[]> results = session.createQuery(hqlQuery);
+            if (limit > 0) {
                 results = results.setMaxResults(limit);
             }
             session.getTransaction().commit();

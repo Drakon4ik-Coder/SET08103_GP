@@ -60,11 +60,41 @@ public class AppTest {
             country2.setCapital(city2);
 
             // Save entities
+
+
+            // Create dummy language data
+            CountryLanguage language1 = new CountryLanguage();
+            CountryLanguageId id1 = new CountryLanguageId();
+            id1.setCountryCode("CNT1");
+            id1.setLanguage("Chinese");
+            language1.setId(id1);
+            language1.setIsOfficial(YesNo.T);
+            language1.setPercentage(60.0); // 20% of Country 1's population speaks Chinese
+
+            CountryLanguage language2 = new CountryLanguage();
+            CountryLanguageId id2 = new CountryLanguageId();
+            id2.setCountryCode("CNT1");
+            id2.setLanguage("English");
+            language2.setId(id2);
+            language2.setIsOfficial(YesNo.F);
+            language2.setPercentage(40.0); // 30% of Country 1's population speaks English
+
+            CountryLanguage language3 = new CountryLanguage();
+            CountryLanguageId id3 = new CountryLanguageId();
+            id3.setCountryCode("CNT2");
+            id3.setLanguage("Spanish");
+            language3.setId(id3);
+            language3.setIsOfficial(YesNo.T);
+            language3.setPercentage(100.0); // 25% of Country 2's population speaks Spanish
+
+            // Save language entities
+            session.save(language1);
+            session.save(language2);
+            session.save(language3);
             session.save(country1);
             session.save(country2);
             session.save(city1);
             session.save(city2);
-
 
             transaction.commit();
         }
@@ -286,6 +316,37 @@ public class AppTest {
     }
 
     @Test
+    void testDBReaderNonEntityQuery() {
+        List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
+        Assertions.assertEquals(3, l.size());
+    }
+
+    @Test
+    void testDBReaderNonEntityQueryLimit() {
+        List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 1, "");
+        Assertions.assertEquals(1, l.size());
+    }
+
+    @Test
+    void testLanguageReport() {
+        List<Object[]> l = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
+        for (Object[] row : l) {
+            String language = (String) row[0];
+            Double totalSpeakers = (Double) row[1];
+            Double percentageOfWorldPopulation = (Double) row[2];
+            //System.out.printf("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
+            if ("Spanish".equals(language)) {
+                Assertions.assertEquals(60.0, percentageOfWorldPopulation, 0.01);
+                Assertions.assertEquals(15000000, totalSpeakers);
+            } else if ("Chinese".equals(language)) {
+                Assertions.assertEquals(24.0, percentageOfWorldPopulation, 0.01);
+                Assertions.assertEquals(6000000, totalSpeakers);
+            } else if ("English".equals(language)) {
+                Assertions.assertEquals(16.0, percentageOfWorldPopulation, 0.01);
+                Assertions.assertEquals(4000000, totalSpeakers);
+            }
+        }
+    }
     void testPopulationWorld() {
         List<Population> c = DBReader.queryDB(Query.Population.WORLD, 0);
         Assertions.assertEquals(1, c.size());

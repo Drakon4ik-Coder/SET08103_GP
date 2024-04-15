@@ -24,6 +24,19 @@ abstract class Query {
         public static final QueryString REGION_DESC = new QueryString("FROM Country c WHERE c.region = '%s' ORDER BY c.population DESC", QueryType.COUNTRY);
     }
 
+
+    abstract static class Language {
+        public static final QueryString LANGUAGE_DESC = new QueryString(
+                "SELECT cli.id.language, SUM(cli.percentage * c.population / 100) AS totalSpeakers, " +
+                        "(SUM(cli.percentage * c.population / 100) / (SELECT SUM(c2.population) FROM Country c2)) * 100 AS percentageOfWorldPopulation " +
+                        "FROM CountryLanguage cli " +
+                        "JOIN Country c ON cli.id.countryCode = c.code " +
+                        "GROUP BY cli.id.language " +
+                        "ORDER BY totalSpeakers DESC", QueryType.LANGUAGE);
+
+    }
+
+
     abstract static class Population {
         public static final QueryString WORLD = new QueryString("SELECT 'world' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country) r1, (SELECT SUM(population) as sum FROM City) r2", QueryType.POPULATION);
         public static final QueryString CONTINENT = new QueryString("SELECT '%s' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country WHERE continent='%s') r1, (SELECT SUM(population) as sum FROM City WHERE country.continent='%s') r2", QueryType.POPULATION);
