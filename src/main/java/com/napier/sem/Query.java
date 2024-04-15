@@ -24,16 +24,5 @@ abstract class Query {
         public static final QueryString REGION_DESC = new QueryString("FROM Country c WHERE c.region = '%s' ORDER BY c.population DESC", QueryType.COUNTRY);
     }
 
-    abstract static class Language {
-        public static final QueryString LANGUAGE_DESC = new QueryString(
-                "SELECT cli.id.language, SUM(cli.percentage * c.population / 100) AS totalSpeakers, " +
-                        "(SUM(cli.percentage * c.population / 100) / (SELECT SUM(c2.population) FROM Country c2)) * 100 AS percentageOfWorldPopulation " +
-                        "FROM CountryLanguage cli " +
-                        "JOIN Country c ON cli.id.countryCode = c.code " +
-                        "GROUP BY cli.id.language " +
-                        "ORDER BY totalSpeakers DESC", QueryType.LANGUAGE);
-
-    }
-
 
 }
