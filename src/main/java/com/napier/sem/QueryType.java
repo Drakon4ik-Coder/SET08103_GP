@@ -4,7 +4,7 @@ public enum QueryType {
     CITY(City.class),
     COUNTRY(Country.class),
     CAPITAL_CITY(City.class),
-    LANGUAGE(CountryLanguage.class);
+    LANGUAGE(CountryLanguage.class),
     POPULATION(Population.class);
   
     public final Class queryClass;

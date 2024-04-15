@@ -338,16 +338,15 @@ public class AppTest {
             if ("Spanish".equals(language)) {
                 Assertions.assertEquals(60.0, percentageOfWorldPopulation, 0.01);
                 Assertions.assertEquals(15000000, totalSpeakers);
-            }
-            else if ("Chinese".equals(language)) {
+            } else if ("Chinese".equals(language)) {
                 Assertions.assertEquals(24.0, percentageOfWorldPopulation, 0.01);
                 Assertions.assertEquals(6000000, totalSpeakers);
-            }
-            else if ("English".equals(language)) {
+            } else if ("English".equals(language)) {
                 Assertions.assertEquals(16.0, percentageOfWorldPopulation, 0.01);
                 Assertions.assertEquals(4000000, totalSpeakers);
             }
         }
+    }
     void testPopulationWorld() {
         List<Population> c = DBReader.queryDB(Query.Population.WORLD, 0);
         Assertions.assertEquals(1, c.size());
