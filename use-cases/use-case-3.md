@@ -40,7 +40,7 @@ User chooses country report for continent option
 
 ## EXTENSIONS
 
-3. **The database is not reachable**:
+1. **The database is not reachable**:
     1. The program informs the user a connection error has occurred.
 
 ## SUB-VARIATIONS

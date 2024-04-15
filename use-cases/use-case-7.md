@@ -1,10 +1,10 @@
-# USE CASE: 4 Country Report for continent(limit N)
+# USE CASE: 6 Country Report for region(limit N)
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a *user*, I want *to generate a report on the top N populated countries on the continent specified by me, where N is a value provided by me* so that *I can quickly find information on the most populated countries on the continent.*
+As a *user*, I want *to generate a report on the number of people who speak Chinese, English, Hindi, Arabic and Spanish languages in descending order, including the percentage of the world population* so that *I can quickly find information on the popularity of these languages.*
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-Database contains country data.
+Database contains country and language data.
 
 ### Success End Condition
 
@@ -32,13 +32,12 @@ Application user.
 
 ### Trigger
 
-User chooses country report for continent option
+User chooses country report by region option
 
 ## MAIN SUCCESS SCENARIO
 
-1. User chooses country report for continent option
-2. User specifies a result count limit.
-3. The report is displayed to the user
+1. User chooses language report option
+2. The report is displayed to the user
 
 ## EXTENSIONS
 
