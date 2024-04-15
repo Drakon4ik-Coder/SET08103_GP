@@ -4,7 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DBReader {
@@ -22,7 +23,12 @@ public class DBReader {
     // Method for queries that return ORM entities
     public static <T> List<T> queryDB(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
-        if (queryParam.length != 0) {
+        if(queryParam.length == 1) {
+            int count = hqlQuery.split("%s", -1).length - 1;
+            String[] queryArgs = new String[count];
+            Arrays.fill(queryArgs, queryParam[0]);
+            hqlQuery = String.format(hqlQuery, queryArgs);
+        } else if (queryParam.length > 1) {
             hqlQuery = String.format(hqlQuery, queryParam);
         }
 
@@ -56,6 +62,7 @@ public class DBReader {
             session.getTransaction().commit();
             return results.list();
         } catch (Exception e) {
+            System.out.println(e);
             e.printStackTrace();
         }
         return null;

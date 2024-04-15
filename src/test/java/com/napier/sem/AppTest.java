@@ -348,6 +348,36 @@ public class AppTest {
                 Assertions.assertEquals(4000000, totalSpeakers);
             }
         }
+    void testPopulationWorld() {
+        List<Population> c = DBReader.queryDB(Query.Population.WORLD, 0);
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testPopulationContinent() {
+        List<Population> c = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
+        Assertions.assertEquals(1, c.size());
+    }
+
+    @Test
+    void testPopulationCountry() {
+        List<Population> c = DBReader.queryDB(Query.Population.COUNTRY, 0, "Country 1");
+        Assertions.assertEquals(1, c.size());
+    }
+    @Test
+    void testPopulationDistrict() {
+        List<Population> c = DBReader.queryDB(Query.Population.DISTRICT, 0, "District 1");
+        Assertions.assertEquals(1, c.size());
+    }
+    @Test
+    void testPopulationRegion() {
+        List<Population> c = DBReader.queryDB(Query.Population.REGION, 0, "Region 1");
+        Assertions.assertEquals(1, c.size());
+    }
+    @Test
+    void testPopulationCity() {
+        List<Population> c = DBReader.queryDB(Query.Population.CITY, 0, "City 1");
+        Assertions.assertEquals(1, c.size());
     }
 }
 
