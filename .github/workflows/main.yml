@@ -2,14 +2,46 @@ name: Docker compose test
 on: push
 
 jobs:
+  integrationTests:
+    name: Integration tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '10'
+          distribution: 'adopt'
+      - name: Integration Tests
+        run: |
+          docker build -t database ./db 
+          docker run -d --name database -p 3306:3306 -e MYSQL_DATABASE=db -e MYSQL_USER=user -e MYSQL_PASSWORD=1234 -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_ROOT_HOST='%' -v world.sql:/etc/mysql/ database
+          mvn -Dtest=com.napier.sem.IntegrationTests test
+          docker stop database
+          docker rm database
+          docker image rm database
+
+  unitTests:
+    name: Unit tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '10'
+          distribution: 'adopt'
+      - name: Run Unit tests
+        run: mvn -Dtest=com.napier.sem.AppTest test
+
   build:
     name: Docker compose test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Unit tests
-        run: mvn test
       - name: Compose Docker services
         run: docker-compose -f docker-compose.yml build
       - name: Run services
