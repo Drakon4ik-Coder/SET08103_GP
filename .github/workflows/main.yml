@@ -17,6 +17,14 @@ jobs:
           docker stop database
           docker rm database
           docker image rm database
+      - name: CodeCov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: ./target/site/jacoco
+          flags: Integration Tests
+          verbose: true
+          slug: Drakon4ik-Coder/SET08103_GP
 
   unitTests:
     name: Unit tests
@@ -24,7 +32,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Run Unit tests
         run: mvn -Dtest=com.napier.sem.AppTest test
 
