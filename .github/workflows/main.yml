@@ -39,15 +39,16 @@ jobs:
         run: mvn -Dtest=com.napier.sem.AppTest test
 
   build:
-    name: Build Run in Docker and Deploy Release
+    name: Docker compose test
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Package and Run docker compose
-        run: |
-          mvn package -DskipTests
-          docker-compose up --abort-on-container-exit
+      - name: Compose Docker services
+        run: docker-compose -f docker-compose.yml build
+      - name: Run services
+        run: docker-compose -f docker-compose.yml up -d
+      - name: Check exit code
         run: |
           exit_code=$(docker wait app)
           if [ $exit_code -ne 0 ]; then
