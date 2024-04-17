@@ -12,17 +12,15 @@ public class DBReader {
     private static SessionFactory sessionFactory = null;
 
     public static void initSession(String configFile, String ... connectionUrl) {
-        if (sessionFactory == null) {
-            try {
-                // Create the SessionFactory from hibernate.cfg.xml
-                Configuration configuration = new Configuration().configure(configFile);
-                if (connectionUrl.length == 1) {
-                    configuration.setProperty("hibernate.connection.url", connectionUrl[0]);
-                }
-                sessionFactory = configuration.buildSessionFactory();
-            } catch (Throwable ex) {
-                throw new ExceptionInInitializerError(ex);
+        try {
+            // Create the SessionFactory from hibernate.cfg.xml
+            Configuration configuration = new Configuration().configure(configFile);
+            if (connectionUrl.length == 1) {
+                configuration.setProperty("hibernate.connection.url", connectionUrl[0]);
             }
+            sessionFactory = configuration.buildSessionFactory();
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError(ex);
         }
     }
 
