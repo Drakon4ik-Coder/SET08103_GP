@@ -1,4 +1,4 @@
-# USE CASE: 6 Country Report for region(limit N)
+# USE CASE: 7 Language report
 
 ## CHARACTERISTIC INFORMATION
 
@@ -32,7 +32,7 @@ Application user.
 
 ### Trigger
 
-User chooses country report by region option
+User chooses language report option
 
 ## MAIN SUCCESS SCENARIO
 

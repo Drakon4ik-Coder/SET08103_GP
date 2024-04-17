@@ -29,26 +29,27 @@ public class Main {
             System.out.println(capCity.toStringCapital());
         }
 //--City
+        System.out.println("\nWorld city population descending:");
         List<City> citiesWorld = DBReader.queryDB(Query.City.WORLD_DESC, 10);
         for (City city : citiesWorld) {
             System.out.println(city.toString());
         }
-
+        System.out.println("\nAsian continent city population descending:");
         List<City> citiesContinent = DBReader.queryDB(Query.City.CONTINENT_DESC, 10, Continent.Asia.name());
         for (City city : citiesContinent) {
             System.out.println(city.toString());
         }
-
+        System.out.println("\nFrance city population descending:");
         List<City> citiesCountry = DBReader.queryDB(Query.City.COUNTRY_DESC, 10, "France");
         for (City city : citiesCountry) {
             System.out.println(city.toString());
         }
-
+        System.out.println("\nPolynesia region population descending:");
         List<City> citiesRegion = DBReader.queryDB(Query.City.REGION_DESC, 10, "Polynesia");
         for (City city : citiesRegion) {
             System.out.println(city.toString());
         }
-
+        System.out.println("\nRajasthan district population descending:");
         List<City> citiesDistrict = DBReader.queryDB(Query.City.DISTRICT_DESC, 10, "Rajasthan");
         for (City city : citiesDistrict) {
             System.out.println(city.toString());
@@ -83,6 +84,8 @@ public class Main {
             }
         }
 
+//--Population
+        System.out.println("\nPopulation report:");
         List<Population> Populations = DBReader.queryDB(Query.Population.WORLD, 0);
         for (Population p : Populations) {
             System.out.println(p.toString());
