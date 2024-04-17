@@ -84,6 +84,8 @@ public class Main {
             }
         }
 
+//--Population
+        System.out.println("\nPopulation report:");
         List<Population> Populations = DBReader.queryDB(Query.Population.WORLD, 0);
         for (Population p : Populations) {
             System.out.println(p.toString());
