@@ -35,8 +35,8 @@ public class IntegrationTests {
     void testQueryCity() {
         List<City> c = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, 10);
         assert c != null;
-        Assertions.assertEquals("China", c.get(0).getName());
-        Assertions.assertEquals("New York", c.get(9).getName());
+        Assertions.assertEquals("Seoul", c.get(0).getName());
+        Assertions.assertEquals("Lima", c.get(9).getName());
 
         c = DBReader.queryDB(Query.City.CONTINENT_DESC, 10, Continent.Asia.name());
         assert c != null;
@@ -74,7 +74,7 @@ public class IntegrationTests {
         c = DBReader.queryDB(Query.Country.REGION_DESC, 10, "Western Europe");
         assert c != null;
         Assertions.assertEquals("Germany", c.get(0).getName());
-        Assertions.assertEquals("Liechtenstein", c.get(9).getName());
+        Assertions.assertEquals("Liechtenstein", c.get(8).getName());
     }
 
     @Test
