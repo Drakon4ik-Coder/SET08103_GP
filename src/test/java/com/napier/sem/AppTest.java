@@ -16,6 +16,7 @@ public class AppTest {
 
     @BeforeAll
     static void init() {
+        DBReader.initSession("hibernate.cfg.xml");
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             addDummyData(session);
         }

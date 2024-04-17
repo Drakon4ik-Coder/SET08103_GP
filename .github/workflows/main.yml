@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Run Maven tests
+      - name: Run Unit tests
         run: mvn test
       - name: Compose Docker services
         run: docker-compose -f docker-compose.yml build

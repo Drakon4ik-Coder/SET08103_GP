@@ -6,8 +6,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
+        if(args.length!=0 && args[0].equals("DEBUG")) {
+            DBReader.initSession("hibernate.cfg.xml", "jdbc:mysql://localhost:3306/world");
+        } else {
+            DBReader.initSession("hibernate.cfg.xml");
+        }
 //--Capital City
         System.out.println("World capital city population descending:");
         List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, 10);
@@ -77,32 +81,33 @@ public class Main {
                 Double percentageOfWorldPopulation = (Double) row[2];
                 System.out.printf("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
             }
-
-            List<Population> Populations = DBReader.queryDB(Query.Population.WORLD, 0);
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
-            Populations = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
-            Populations = DBReader.queryDB(Query.Population.COUNTRY, 0, "Ukraine");
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
-            Populations = DBReader.queryDB(Query.Population.REGION, 0, "Western Europe");
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
-            Populations = DBReader.queryDB(Query.Population.DISTRICT, 0, "Kiova");
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
-            Populations = DBReader.queryDB(Query.Population.CITY, 0, "Kyiv");
-            for (Population p : Populations) {
-                System.out.println(p.toString());
-            }
         }
+
+        List<Population> Populations = DBReader.queryDB(Query.Population.WORLD, 0);
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.CONTINENT, 0, "Asia");
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.COUNTRY, 0, "Ukraine");
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.REGION, 0, "Western Europe");
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.DISTRICT, 0, "Kiova");
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+        Populations = DBReader.queryDB(Query.Population.CITY, 0, "Kyiv");
+        for (Population p : Populations) {
+            System.out.println(p.toString());
+        }
+
     }
 }
 

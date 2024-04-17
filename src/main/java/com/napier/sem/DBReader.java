@@ -9,14 +9,20 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DBReader {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = null;
 
-    static {
-        try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
+    public static void initSession(String configFile, String ... connectionUrl) {
+        if (sessionFactory == null) {
+            try {
+                // Create the SessionFactory from hibernate.cfg.xml
+                Configuration configuration = new Configuration().configure(configFile);
+                if (connectionUrl.length == 1) {
+                    configuration.setProperty("hibernate.connection.url", connectionUrl[0]);
+                }
+                sessionFactory = configuration.buildSessionFactory();
+            } catch (Throwable ex) {
+                throw new ExceptionInInitializerError(ex);
+            }
         }
     }
 
