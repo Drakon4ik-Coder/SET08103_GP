@@ -1,10 +1,10 @@
-# USE CASE: 15 city Report for region(limit N)
+# USE CASE: 15 city Report for district(limit N)
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
-As a *user*, I want *to generate a report on the top N populated cities in the region specified by me, where N is a value provided by me* so that *I can quickly find information on the most populated cities in the region.*
+As a *user*, I want *to generate a report on the top N populated cities in the district specified by me, where N is a value provided by me* so that *I can quickly find information on the most populated cities in the district.*
 
 ### Scope
 
@@ -32,11 +32,11 @@ Application user.
 
 ### Trigger
 
-User chooses city report by region option
+User chooses city report by district option
 
 ## MAIN SUCCESS SCENARIO
 
-1. User chooses city report for region option
+1. User chooses city report for district option
 2. User specifies a result count limit.
 3. The report is displayed to the user
 
