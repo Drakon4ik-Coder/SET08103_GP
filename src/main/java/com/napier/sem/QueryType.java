@@ -1,5 +1,9 @@
 package com.napier.sem;
 
+/*
+ * QueryType enumerator
+ * stores all queries types
+ */
 public enum QueryType {
     CITY(City.class),
     COUNTRY(Country.class),

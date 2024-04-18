@@ -3,6 +3,11 @@ package com.napier.sem;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/*
+ * City class for hibernate mapping
+ * corresponds to city table in database
+ * Include instances of capital city
+ */
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -3,6 +3,10 @@ package com.napier.sem;
 import jakarta.persistence.*;
 import lombok.Data;
 
+/*
+ * CountryLanguage class for hibernate mapping
+ * corresponds to countrylanguage table in database
+ */
 @Data
 @Entity
 @Table(name = "countrylanguage")

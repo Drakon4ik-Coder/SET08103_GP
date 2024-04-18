@@ -4,6 +4,11 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.List;
 
+/*
+ * Main class
+ * Pass DEBUG as argument for local debugging
+ * Otherwise, container deploy is configured
+ */
 public class Main {
     public static void main(String[] args) {
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);

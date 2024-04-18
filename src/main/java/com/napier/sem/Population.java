@@ -3,6 +3,10 @@ package com.napier.sem;
 import lombok.Getter;
 import lombok.Setter;
 
+/*
+ * Helper Population class
+ * store results of population reports
+ */
 public class Population {
     @Getter
     @Setter

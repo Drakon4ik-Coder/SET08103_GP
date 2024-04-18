@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Database reader class
+ * must call initSession before query
+ */
 public class DBReader {
     private static SessionFactory sessionFactory = null;
 

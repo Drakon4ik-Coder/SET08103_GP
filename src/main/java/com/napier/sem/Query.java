@@ -1,5 +1,8 @@
 package com.napier.sem;
 
+/* Query class
+ * contain predefined sql queries
+ */
 abstract class Query {
     private Query(){
 

@@ -3,6 +3,10 @@ package com.napier.sem;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
+/*
+ * Continent class converter
+ * Transform enum values to string
+ */
 @Converter(autoApply = true)
 public class ContinentEnumConverter implements AttributeConverter<Continent, String> {
 

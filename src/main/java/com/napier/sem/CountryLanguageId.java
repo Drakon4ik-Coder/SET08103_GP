@@ -6,6 +6,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/*
+ * CountryLanguageId class
+ * used for mapping Country class to CountryLanguage class
+ */
 @Data
 @Embeddable
 public class CountryLanguageId implements Serializable {

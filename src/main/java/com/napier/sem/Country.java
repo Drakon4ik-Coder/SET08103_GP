@@ -3,6 +3,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 
+/*
+ * Country class for hibernate mapping
+ * corresponds to country table in database
+ */
 @Data
 @Entity
 @Table(name = "country")
