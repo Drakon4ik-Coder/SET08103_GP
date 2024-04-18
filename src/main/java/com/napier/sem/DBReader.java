@@ -15,6 +15,13 @@ import java.util.List;
 public class DBReader {
     private static SessionFactory sessionFactory = null;
 
+    /*
+     * initSession method
+     * called before query database
+     * inits session in hibernate
+     * accepts mandatory configuration file name
+     * and optional hibernate connection url
+     */
     public static void initSession(String configFile, String ... connectionUrl) {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
@@ -28,7 +35,13 @@ public class DBReader {
         }
     }
 
-    // Method for queries that return ORM entities
+    /*
+     * queryDB method
+     * query database through hibernate connection and return result in objects
+     * accepts mandatory QueryString object as query, result limit
+     * and optional parameters for the query
+     * returns ORM objects list
+     */
     public static <T> List<T> queryDB(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
         if(queryParam.length == 1) {
@@ -54,7 +67,14 @@ public class DBReader {
         return null;
     }
 
-    // Method for non-entity queries
+    /*
+     * queryDBNonEntity method
+     * for not entities
+     * query database through hibernate connection and return result in objects
+     * accepts mandatory QueryString object as query, result limit
+     * and optional parameters for the query
+     * returns Object[] list
+     */
     public static List<Object[]> queryDBNonEntity(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
         if (queryParam.length != 0) {
