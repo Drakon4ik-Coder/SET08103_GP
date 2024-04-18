@@ -11,6 +11,7 @@ public class IntegrationTests {
     @BeforeAll
     static void init() {
         DBReader.initSession("hibernate-integration.cfg.xml");
+        HibernateUtil.shutdown();
     }
 
     @Test
