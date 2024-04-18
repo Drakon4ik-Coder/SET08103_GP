@@ -16,6 +16,8 @@ rectangle "System" {
     usecase UC9 as "City Report for world (Limit N)"
     usecase UC10 as "City Report for continent"
     usecase UC11 as "City Report for continent (Limit N)"
+    usecase UC12 as "City Report for country"
+    usecase UC13 as "City Report for country (Limit N)"
 
     U - UC2
     U - UC4
@@ -23,12 +25,14 @@ rectangle "System" {
     U - UC7
     U - UC9
     U - UC11
+    U - UC13
 
     UC2 ..> UC1 : include
     UC4 ..> UC3 : include
     UC6 ..> UC5 : include
     UC9 ..> UC8 : include
     UC11 ..> UC10 : include
+    UC13 ..> UC12 : include
 
     UC1 - Database
     UC2 - Database
@@ -41,6 +45,8 @@ rectangle "System" {
     UC9 - Database
     UC10 - Database
     UC11 - Database
+    UC12 - Database
+    UC13 - Database
 }
 
 @enduml
