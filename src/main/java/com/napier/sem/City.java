@@ -31,6 +31,11 @@ public class City {
     @Column(name = "Population")
     private int population;
 
+    /*
+     * City toString method
+     * returns string with City's
+     * name, country, district and population
+     */
     @Override
     public String toString(){
         return "City{" +
@@ -40,6 +45,14 @@ public class City {
                 ", population=" + population +
                 '}';
     }
+    /*
+     * City toStringCapital method
+     * called when City need to be treated as CapitalCity
+     * call toString method if not capitalCity
+     * Otherwise
+     * returns string with City's
+     * name, country and population
+     */
     public String toStringCapital(){
         if (country.getCapital()==this) {
             return "CapitalCity{" +
