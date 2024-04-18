@@ -120,9 +120,20 @@ abstract class Query {
          * @param continent The continent to filter by.
          */
         public static final QueryString CONTINENT = new QueryString("SELECT '%s' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country WHERE continent='%s') r1, (SELECT SUM(population) as sum FROM City WHERE country.continent='%s') r2", QueryType.POPULATION);
+        /**
+         * Query to get the population of a given country.
+         * @param country The city to filter by.
+         */
         public static final QueryString COUNTRY = new QueryString("SELECT '%s' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country WHERE name='%s') r1, (SELECT SUM(population) as sum FROM City WHERE country.name='%s') r2", QueryType.POPULATION);
-
+        /**
+         * Query to get the population of a given region.
+         * @param region The region to filter by.
+         */
         public static final QueryString REGION = new QueryString("SELECT '%s' as reportName, r1.sum as total, r2.sum as city, r1.sum-r2.sum as notCity FROM (SELECT SUM(population) as sum FROM Country WHERE region='%s') r1, (SELECT SUM(population) as sum FROM City WHERE country.region='%s') r2", QueryType.POPULATION);
+        /**
+         * Query to get the population of a given district.
+         * @param ditrict The district to filter by.
+         */
         public static final QueryString DISTRICT = new QueryString("SELECT '%s' as reportName, r1.sum as total, r1.sum as city, -1 as notCity FROM (SELECT SUM(population) as sum FROM City WHERE district='%s') r1", QueryType.POPULATION);
         /**
          * Query to get the population of a given city.
