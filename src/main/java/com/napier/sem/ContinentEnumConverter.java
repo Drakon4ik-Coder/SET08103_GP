@@ -3,13 +3,19 @@ package com.napier.sem;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-/*
- * Continent class converter
- * Transform enum values to string
+/**
+ * This class converts Continent enum values to and from database strings.
  */
 @Converter(autoApply = true)
 public class ContinentEnumConverter implements AttributeConverter<Continent, String> {
 
+    /**
+     * Converts a Continent enum value to a database string.
+     *
+     * @param continent the Continent enum value to convert.
+     * @return the database string representation of the Continent.
+     * @throws IllegalArgumentException if the Continent is not recognized.
+     */
     @Override
     public String convertToDatabaseColumn(Continent continent) {
         if (continent == null) {
@@ -35,6 +41,13 @@ public class ContinentEnumConverter implements AttributeConverter<Continent, Str
         }
     }
 
+    /**
+     * Converts a database string to a Continent enum value.
+     *
+     * @param continent the database string to convert.
+     * @return the Continent enum value represented by the database string.
+     * @throws IllegalArgumentException if the database string is not recognized.
+     */
     @Override
     public Continent convertToEntityAttribute(String continent) {
         if (continent == null) {

@@ -1,7 +1,7 @@
 package com.napier.sem;
 
-/*
- * Continent enumerator for hibernate objects
+/**
+ * Enum representing the different continents
  */
 public enum Continent {
     Asia,
