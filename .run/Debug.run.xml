@@ -1,16 +1,16 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Debug" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.napier.sem.Main" />
-    <module name="wReports" />
-    <option name="PROGRAM_PARAMETERS" value="DEBUG" />
+    <option name="MAIN_CLASS_NAME" value="com.napier.sem.Main" /> // The main class name for this configuration is set to "com.napier.sem.Main"
+    <module name="wReports" /> // The module name for this configuration is set to "wReports"
+    <option name="PROGRAM_PARAMETERS" value="DEBUG" /> // The program parameters for this configuration are set to "DEBUG"
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.napier.sem.*" />
-        <option name="ENABLED" value="true" />
+        <option name="PATTERN" value="com.napier.sem.*" /> // The pattern for code coverage is set to "com.napier.sem.*"
+        <option name="ENABLED" value="true" /> // Code coverage is enabled for this configuration
       </pattern>
     </extension>
     <method v="2">
-      <option name="Make" enabled="true" />
+      <option name="Make" enabled="true" /> // The "Make" option is enabled for this configuration
     </method>
   </configuration>
 </component>

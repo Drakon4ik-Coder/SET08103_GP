@@ -31,10 +31,9 @@ public class City {
     @Column(name = "Population")
     private int population;
 
-    /*
-     * City toString method
-     * returns string with City's
-     * name, country, district and population
+    /**
+     * Converts the city object to a string representation.
+     * @return String representation of the city object.
      */
     @Override
     public String toString(){
@@ -45,13 +44,10 @@ public class City {
                 ", population=" + population +
                 '}';
     }
-    /*
-     * City toStringCapital method
-     * called when City need to be treated as CapitalCity
-     * call toString method if not capitalCity
-     * Otherwise
-     * returns string with City's
-     * name, country and population
+
+    /**
+     * Converts the city object to a string representation if it is a capital city.
+     * @return String representation of the city object if it is a capital city.
      */
     public String toStringCapital(){
         if (country.getCapital()==this) {

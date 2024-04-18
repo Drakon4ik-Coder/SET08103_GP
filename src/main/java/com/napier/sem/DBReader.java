@@ -8,21 +8,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*
- * Database reader class
- * must call initSession before query
+/**
+ * This class is responsible for reading data from the database using Hibernate.
  */
 public class DBReader {
     private static SessionFactory sessionFactory = null;
 
-    /*
-     * initSession method
-     * called before query database
-     * inits session in hibernate
-     * accepts mandatory configuration file name
-     * and optional hibernate connection url
+    /**
+     * Initializes the SessionFactory with the given configuration file and connection URL.
+     * @param configFile The path to the Hibernate configuration file.
+     * @param connectionUrl The connection URL for the database.
      */
-    public static void initSession(String configFile, String ... connectionUrl) {
+    public static void initSession(String configFile, String... connectionUrl) {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
             Configuration configuration = new Configuration().configure(configFile);
@@ -35,12 +32,12 @@ public class DBReader {
         }
     }
 
-    /*
-     * queryDB method
-     * query database through hibernate connection and return result in objects
-     * accepts mandatory QueryString object as query, result limit
-     * and optional parameters for the query
-     * returns ORM objects list
+    /**
+     * Executes a query that returns ORM entities.
+     * @param query The QueryString object containing the HQL query and its type.
+     * @param limit The maximum number of results to return.
+     * @param queryParam The parameter(s) to be used in the query.
+     * @return A list of ORM entities.
      */
     public static <T> List<T> queryDB(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
@@ -67,17 +64,16 @@ public class DBReader {
         return null;
     }
 
-    /*
-     * queryDBNonEntity method
-     * for not entities
-     * query database through hibernate connection and return result in objects
-     * accepts mandatory QueryString object as query, result limit
-     * and optional parameters for the query
-     * returns Object[] list
+    /**
+     * Executes a query that returns non-entity results.
+     * @param query The QueryString object containing the HQL query.
+     * @param limit The maximum number of results to return.
+     * @param queryParam The parameter(s) to be used in the query.
+     * @return A list of non-entity results.
      */
     public static List<Object[]> queryDBNonEntity(QueryString query, int limit, String... queryParam) {
         String hqlQuery = query.getQuery();
-        if (queryParam.length != 0) {
+        if (queryParam.length!= 0) {
             hqlQuery = String.format(hqlQuery, queryParam);
         }
 

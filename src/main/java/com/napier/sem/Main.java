@@ -4,14 +4,12 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.List;
 
-/*
- * Main class
- * Pass DEBUG as argument for local debugging
- * Otherwise, container deploy is configured
- */
 public class Main {
     public static void main(String[] args) {
+        // Disable logging for the application, only show severe errors
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
+        // Initialize the database session with hibernate configuration file
+        // If the first argument is "DEBUG", then initialize the session with a specific JDBC URL
         if(args.length!=0 && args[0].equals("DEBUG")) {
             DBReader.initSession("hibernate.cfg.xml", "jdbc:mysql://localhost:3306/world");
         } else {
