@@ -13,16 +13,18 @@ rectangle "System" {
     usecase UC6 as "Country Report for region(limit N)"
     usecase UC7 as "Language report"
     usecase UC8 as "City Report for world"
+    usecase UC9 as "City Report for world (Limit N)"
 
     U - UC2
     U - UC4
     U - UC6
     U - UC7
-    U - UC8
+    U - UC9
 
     UC2 ..> UC1 : include
     UC4 ..> UC3 : include
     UC6 ..> UC5 : include
+    UC9 ..> UC8 : include
 
     UC1 - Database
     UC2 - Database
@@ -32,6 +34,7 @@ rectangle "System" {
     UC6 - Database
     UC7 - Database
     UC8 - Database
+    UC9 - Database
 }
 
 @enduml
