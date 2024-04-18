@@ -35,14 +35,30 @@ public class Population {
         notCityPopulation=notCity;
     }
 
+    /*
+     * Population getCityPercentage method
+     * returns ratio of city population to total population in percentage
+     */
     int getCityPercentage() {
         if(notCityPopulation == -1) { return 100; }
         return (int)(((double)cityPopulation/totalPopulation)*100);
     }
+
+    /*
+     * Population getNotCityPercentage method
+     * returns ratio of non-city population to total population in percentage
+     */
     int getNotCityPercentage() {
         return (int)(((double)notCityPopulation/totalPopulation)*100);
     }
 
+    /*
+     * Population toString method
+     * returns string with Population report's
+     * name, total, city and non-city population
+     * if there is no information about non-city population
+     * it adds Not Enough Data
+     */
     @Override
     public String toString(){
         String ret = "Population{" +
