@@ -33,6 +33,11 @@ public class Country {
     @JoinColumn(name = "Capital")
     private City capital;
 
+    /*
+     * Country toString method
+     * returns string with Country's
+     * code, name, continent, region, population and capital
+     */
     @Override
     public String toString() {
         return "Country{" +
