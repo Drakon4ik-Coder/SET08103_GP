@@ -82,6 +82,6 @@ Contributions to the project are welcome. To contribute, follow these steps:
 
 This project is licensed under the [Apache-2.0 license](LICENSE).
 
-[![LICENSE](https://img.shields.io/github/license/Drakon4ik-Coder/SET08103_GP.svg?style=flat-square)](https://github.com/Alex180504/sem/blob/master/LICENSE)
-[![Releases](https://img.shields.io/github/release/Drakon4ik-Coder/SET08103_GP.svg?style=flat-square)](https://github.com/Alex180504/sem/releases)
+[![LICENSE](https://img.shields.io/github/license/Drakon4ik-Coder/SET08103_GP.svg?style=flat-square)](https://github.com/Drakon4ik-Coder/SET08103_GP/blob/master/LICENSE)
+[![Releases](https://img.shields.io/github/release/Drakon4ik-Coder/SET08103_GP.svg?style=flat-square)](https://github.com/Drakon4ik-Coder/SET08103_GP/releases)
 [![A workflow for my Hello World App](https://github.com/Drakon4ik-Coder/SET08103_GP/actions/workflows/main.yml/badge.svg)](https://github.com/Drakon4ik-Coder/SET08103_GP/actions/workflows/main.yml)

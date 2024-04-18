@@ -1,0 +1,64 @@
+@startuml
+
+actor U as "User"
+
+rectangle Database
+
+rectangle "System" {
+    usecase UC1 as "Country Report for world"
+    usecase UC2 as "Country Report for world (Limit N)"
+    usecase UC3 as "Country Report by continent"
+    usecase UC4 as "Country Report for continent(limit N)"
+    usecase UC5 as "Country Report by region"
+    usecase UC6 as "Country Report for region(limit N)"
+    usecase UC7 as "Language report"
+    usecase UC8 as "City Report for world"
+    usecase UC9 as "City Report for world (Limit N)"
+    usecase UC10 as "City Report for continent"
+    usecase UC11 as "City Report for continent (Limit N)"
+    usecase UC12 as "City Report for country"
+    usecase UC13 as "City Report for country (Limit N)"
+    usecase UC14 as "City Report for region"
+    usecase UC15 as "City Report for region (Limit N)"
+    usecase UC16 as "City Report for district"
+    usecase UC17 as "City Report for district (Limit N)"
+
+    U - UC2
+    U - UC4
+    U - UC6
+    U - UC7
+    U - UC9
+    U - UC11
+    U - UC13
+    U - UC15
+    U - UC17
+
+    UC2 ..> UC1 : include
+    UC4 ..> UC3 : include
+    UC6 ..> UC5 : include
+    UC9 ..> UC8 : include
+    UC11 ..> UC10 : include
+    UC13 ..> UC12 : include
+    UC15 ..> UC14 : include
+    UC17 ..> UC16 : include
+
+    UC1 - Database
+    UC2 - Database
+    UC3 - Database
+    UC4 - Database
+    UC5 - Database
+    UC6 - Database
+    UC7 - Database
+    UC8 - Database
+    UC9 - Database
+    UC10 - Database
+    UC11 - Database
+    UC12 - Database
+    UC13 - Database
+    UC14 - Database
+    UC15 - Database
+    UC16 - Database
+    UC17 - Database
+}
+
+@enduml

@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Deploy" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <!-- The path to the environment file, if any, to be used during deployment. -->
+        <option name="envFilePath" value="" />
+        <!-- Additional command line options to be passed to the docker-compose command. -->
+        <option name="commandLineOptions" value="--build" />
+        <!-- The path to the docker-compose.yml file to be used for deployment. -->
+        <option name="sourceFilePath" value="docker-compose.yml" />
+      </settings>
+    </deployment>
+    <method v="2">
+      <!-- Enables the Maven 'package' goal to be executed before running the configuration. -->
+      <option name="Maven.BeforeRunTask" enabled="true" file="$PROJECT_DIR$/pom.xml" goal="package" />
+    </method>
+  </configuration>
+</component>
