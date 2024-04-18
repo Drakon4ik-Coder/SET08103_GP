@@ -139,7 +139,7 @@ abstract class Query {
          * Query to get the population of a given city.
          * @param city The city to filter by.
          */
-        public static final QueryString CITY = new QueryString("SELECT '%s' as reportName, r1.population as total FROM City r1 WHERE r1.name='%s'", QueryType.POPULATION);
+        public static final QueryString CITY = new QueryString("SELECT '%s' as reportName, r1.sum as total, r1.sum as city, -1 as notCity FROM (SELECT SUM(population) as sum FROM City WHERE name='%s') r1", QueryType.POPULATION);
     }
 
 }
