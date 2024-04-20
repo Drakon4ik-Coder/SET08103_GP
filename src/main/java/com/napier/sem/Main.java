@@ -24,11 +24,12 @@ public class Main {
             return null;
         });
 
-        get("/report/:reportName", (req, res) -> {
-            String reportName = req.params(":reportName");
-            if (reportName.equals("Capital city world desc")) {
+        get("/report", (req, res) -> {
+            String reportName = req.queryParams("name");
+            int reportLimit = req.queryParams("limit") != null ? Integer.parseInt(req.queryParams("limit")) : 0;
+            if (reportName.equals("CapitalWorld")) {
                 String ret = "";
-                List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, 10);
+                List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, reportLimit);
                 for (City capCity : capCities) {
                     ret += capCity.toStringCapital()+"\n";
                 }
