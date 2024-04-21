@@ -180,7 +180,67 @@ public class Main {
                     }
                     return ret;
                 }
-                //------------------------------------------------------------------------------------------------------
+                //City--------------------------------------------------------------------------------------------------
+                case "CityWorld": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.WORLD_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityContinent": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.CONTINENT_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityCountry": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.COUNTRY_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityRegion": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.REGION_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityDistrict": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.DISTRICT_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
             }
             return "No such report supported";
         });
