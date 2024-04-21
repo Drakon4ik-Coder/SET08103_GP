@@ -241,6 +241,20 @@ public class Main {
                     }
                     return ret;
                 }
+                case "Language": {
+                    String ret = "";
+                    List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
+                    for (Object[] row : languageSpeakers) {
+                        String language = (String) row[0];
+                        // Filter the results
+                        if (language.equals("Chinese") || language.equals("English") || language.equals("Hindi") || language.equals("Spanish") || language.equals("Arabic")) {
+                            Double totalSpeakers = (Double) row[1];
+                            Double percentageOfWorldPopulation = (Double) row[2];
+                            ret += String.format("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
+                        }
+                    }
+                    return ret;
+                }
             }
             return "No such report supported";
         });
