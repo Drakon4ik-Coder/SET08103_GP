@@ -85,6 +85,7 @@ jobs:
         uses: docker/metadata-action@v2
         with:
           images: drakon4ikcoder/set08103_db
+          tag-custom: latest
 
       - name: Build and push DB image
         uses: docker/build-push-action@v2
@@ -92,7 +93,7 @@ jobs:
           context: ./db/
           file: ./db/Dockerfile
           push: true
-          tags: latest
+          tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.meta1.outputs.labels }}
 
       - name: Extract metadata (tags, labels) App container
@@ -100,6 +101,7 @@ jobs:
         uses: docker/metadata-action@v2
         with:
           images: drakon4ikcoder/set08103_app
+          tag-custom: latest
 
       - name: Build and push App image
         uses: docker/build-push-action@v2
@@ -107,5 +109,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: latest
+          tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.meta2.outputs.labels }}
