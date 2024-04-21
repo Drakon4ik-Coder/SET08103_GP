@@ -182,7 +182,7 @@ public class Main {
                 }
                 //------------------------------------------------------------------------------------------------------
             }
-            return "";
+            return "No such report supported";
         });
 //--Capital City
 //        System.out.println("World capital city population descending:");
