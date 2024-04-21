@@ -92,5 +92,23 @@ public class IntegrationTests {
         }
     }
 
-
+    @Test
+    public void testCountryLanguageTablePresenceAndStructure() {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createNativeQuery("SELECT * FROM countrylanguage");
+            List<Object[]> countryLanguageRows = query.list();
+            assertFalse(countryLanguageRows.isEmpty(), "CountryLanguage table is empty");
+            for (Object[] row : countryLanguageRows) {
+                assertEquals(4, row.length, "Incorrect number of columns in CountryLanguage table");
+                assertTrue(row[0] instanceof String);
+                assertTrue(row[1] instanceof String, "Language column should be a String");
+                assertTrue(row[2] instanceof Character, "IsOfficial column should be a Character (enum in the DB)");
+                assertTrue(row[3] instanceof BigDecimal, "Percentage column should be a BigDecimal");
+            }
+            transaction.commit();
+        } catch (Exception ex) {
+            fail("Failed to check CountryLanguage table presence and structure: " + ex.getMessage());
+        }
+    }
 }
