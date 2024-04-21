@@ -103,7 +103,7 @@ jobs:
       - name: Build and push App image
         uses: docker/build-push-action@v2
         with:
-          context: ./
+          context: .
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta2.outputs.tags }}
