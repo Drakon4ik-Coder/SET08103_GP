@@ -92,7 +92,7 @@ jobs:
           context: ./db/
           file: ./db/Dockerfile
           push: true
-          tags: ${{ steps.meta1.outputs.tags }}
+          tags: latest
           labels: ${{ steps.meta1.outputs.labels }}
 
       - name: Extract metadata (tags, labels) App container
@@ -107,5 +107,5 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta2.outputs.tags }}
+          tags: latest
           labels: ${{ steps.meta2.outputs.labels }}
