@@ -67,6 +67,7 @@ jobs:
               ./target/*.jar
 
   publish_containers:
+    name: Publish Docker images
     runs-on: ubuntu-latest
 
     steps:
@@ -89,7 +90,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./db/
-          file: ./Dockerfile
+          file: ./db/Dockerfile
           push: true
           tags: ${{ steps.meta1.outputs.tags }}
           labels: ${{ steps.meta1.outputs.labels }}
