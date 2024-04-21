@@ -33,72 +33,81 @@ public class Main {
             int reportLimit = req.queryParams("limit") != null ? Integer.parseInt(req.queryParams("limit")) : 0;
             String addParam = req.queryParams("param");
 
-            if (reportName.equals("CapitalWorld")) {
-                String ret = "";
-                List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, reportLimit, addParam);
-                if (capCities!=null) {
-                    for (City capCity : capCities) {
-                        ret += capCity.toStringCapital() + "\n";
+            switch (reportName) {
+                case "CapitalWorld": {
+                    String ret = "";
+                    List<City> capCities = DBReader.queryDB(Query.CapitalCity.WORLD_DESC, reportLimit, addParam);
+                    if (capCities != null && !capCities.isEmpty()) {
+                        for (City capCity : capCities) {
+                            ret += capCity.toStringCapital() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
-            } else if (reportName.equals("CapitalContinent")) {
-                String ret = "";
-                List<City> capCities = DBReader.queryDB(Query.CapitalCity.CONTINENT_DESC, reportLimit, addParam);
-                if (capCities!=null) {
-                    for (City capCity : capCities) {
-                        ret += capCity.toStringCapital() + "\n";
+                case "CapitalContinent": {
+                    String ret = "";
+                    List<City> capCities = DBReader.queryDB(Query.CapitalCity.CONTINENT_DESC, reportLimit, addParam);
+                    System.out.println("Fuck");
+                    System.out.println(capCities);
+                    if (capCities != null && !capCities.isEmpty()) {
+                        for (City capCity : capCities) {
+                            ret += capCity.toStringCapital() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
-            } else if (reportName.equals("CapitalRegion")) {
-                String ret = "";
-                List<City> capCities = DBReader.queryDB(Query.CapitalCity.REGION_DESC, reportLimit, addParam);
-                if (capCities!=null) {
-                    for (City capCity : capCities) {
-                        ret += capCity.toStringCapital() + "\n";
+                case "CapitalRegion": {
+                    String ret = "";
+                    List<City> capCities = DBReader.queryDB(Query.CapitalCity.REGION_DESC, reportLimit, addParam);
+                    if (capCities != null && !capCities.isEmpty()) {
+                        for (City capCity : capCities) {
+                            ret += capCity.toStringCapital() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
-            } else if (reportName.equals("CountryWorld")) {
-                String ret = "";
-                List<Country> countries = DBReader.queryDB(Query.Country.WORLD_DESC, reportLimit, addParam);
-                if (countries!=null) {
-                    for (Country country : countries) {
-                        ret += country.toString() + "\n";
+                case "CountryWorld": {
+                    String ret = "";
+                    List<Country> countries = DBReader.queryDB(Query.Country.WORLD_DESC, reportLimit, addParam);
+                    if (countries != null && !countries.isEmpty()) {
+                        for (Country country : countries) {
+                            ret += country.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
-            } else if (reportName.equals("CountryContinent")) {
-                String ret = "";
-                List<Country> countries = DBReader.queryDB(Query.Country.CONTINENT_DESC, reportLimit, addParam);
-                if (countries!=null) {
-                    for (Country country : countries) {
-                        ret += country.toString() + "\n";
+                case "CountryContinent": {
+                    String ret = "";
+                    List<Country> countries = DBReader.queryDB(Query.Country.CONTINENT_DESC, reportLimit, addParam);
+                    if (countries != null && !countries.isEmpty()) {
+                        for (Country country : countries) {
+                            ret += country.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
-            } else if (reportName.equals("CountryRegion")) {
-                String ret = "";
-                List<Country> countries = DBReader.queryDB(Query.Country.REGION_DESC, reportLimit, addParam);
-                if (countries!=null) {
-                    for (Country country : countries) {
-                        ret += country.toString() + "\n";
+                case "CountryRegion": {
+                    String ret = "";
+                    List<Country> countries = DBReader.queryDB(Query.Country.REGION_DESC, reportLimit, addParam);
+                    if (countries != null && !countries.isEmpty()) {
+                        for (Country country : countries) {
+                            ret += country.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
                     }
-                } else {
-                    ret = "Nothing found";
+                    return ret;
                 }
-                return ret;
             }
             return "";
         });
