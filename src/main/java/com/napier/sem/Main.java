@@ -1,11 +1,15 @@
 package com.napier.sem;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.List;
 import static spark.Spark.*;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
         // Disable logging for the application, only show severe errors
         LogManager.getLogManager().getLogger("").setLevel(Level.SEVERE);
