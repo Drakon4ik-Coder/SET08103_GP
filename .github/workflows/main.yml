@@ -94,7 +94,7 @@ jobs:
       - name: Build and push database docker
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./db/
           file: ./db/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/set08103_db:latest
