@@ -36,5 +36,12 @@ public class IntegrationTests {
         });
     }
 
+    @Test
+    public void testDatabasePresence() {
+        Assertions.assertDoesNotThrow(() -> {
+            DBReader.initSession("hibernate-integration.cfg.xml");
+            HibernateUtil.shutdown();
+        });
+    }
 
 }
