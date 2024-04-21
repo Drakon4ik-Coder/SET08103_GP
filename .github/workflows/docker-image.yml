@@ -1,0 +1,41 @@
+name: Docker Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish_containers:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extract metadata (tags, labels) MySQL container
+        id: meta1
+        uses: docker/metadata-action@2133b8fefb4f46108ea2a0a600ac76277714dbd9b2f82c1db05fa7ab7e74bd58  
+        with:
+          images: drakon4ikcoder/set08103_db
+
+      - name: Build and push MySQL container
+        run: |
+          docker build -t drakon4ikcoder/set08103_db -f db/Dockerfile .
+          docker push drakon4ikcoder/set08103_db
+
+      - name: Extract metadata (tags, labels) App container
+        id: meta2
+        uses: docker/metadata-action@9c4d0143dc236f4f8f6d83019892f78fc3cef368a55be56152a4ac0d37ed01d0
+        with:
+          images: drakon4ikcoder/set08103_app
+
+      - name: Build and push App container
+        run: |
+          docker build -t drakon4ikcoder/set08103_app .
+          docker push drakon4ikcoder/set08103_app
