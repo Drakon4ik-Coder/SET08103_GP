@@ -49,7 +49,6 @@ public class Main {
                 case "CapitalContinent": {
                     String ret = "";
                     List<City> capCities = DBReader.queryDB(Query.CapitalCity.CONTINENT_DESC, reportLimit, addParam);
-                    System.out.println("Fuck");
                     System.out.println(capCities);
                     if (capCities != null && !capCities.isEmpty()) {
                         for (City capCity : capCities) {
