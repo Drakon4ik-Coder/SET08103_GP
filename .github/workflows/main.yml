@@ -89,7 +89,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: user/set08103_app:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/set08103_app:latest
 
       - name: Build and push database docker
         uses: docker/build-push-action@v5
@@ -97,4 +97,4 @@ jobs:
           context: .
           file: ./db/Dockerfile
           push: true
-          tags: user/set08103_db:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/set08103_db:latest
