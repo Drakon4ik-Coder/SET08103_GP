@@ -22,6 +22,7 @@ public class IntegrationTests {
         sessionFactory = configuration.buildSessionFactory();
     }
 
+    // Test connection to db container
     @Test
     public void testDatabaseConnection() {
         Assertions.assertDoesNotThrow(() -> {
@@ -32,6 +33,7 @@ public class IntegrationTests {
         });
     }
 
+    // Test if world db is reachable
     @Test
     public void testDatabasePresence() {
         Assertions.assertDoesNotThrow(() -> {
@@ -40,8 +42,9 @@ public class IntegrationTests {
         });
     }
 
+    // Test if all columns of the City table exists, is not empty and if each column corresponds to the type defined in the DB creation script
     @Test
-    public void testCityTablePresenceAndStructure() {
+    public void testCityTable() {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             Query query = session.createNativeQuery("SELECT * FROM city");
@@ -61,8 +64,9 @@ public class IntegrationTests {
         }
     }
 
+    // Test if all columns of the Country table exists, is not empty and if each column corresponds to the type defined in the DB creation script
     @Test
-    public void testCountryTablePresenceAndStructure() {
+    public void testCountryTable() {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             Query query = session.createNativeQuery("SELECT * FROM country");
@@ -92,8 +96,9 @@ public class IntegrationTests {
         }
     }
 
+    // Test if all columns of the CountryLanguage table exists, is not empty and if each column corresponds to the type defined in the DB creation script
     @Test
-    public void testCountryLanguageTablePresenceAndStructure() {
+    public void testCountryLanguageTable() {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             Query query = session.createNativeQuery("SELECT * FROM countrylanguage");
