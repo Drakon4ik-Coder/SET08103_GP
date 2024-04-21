@@ -13,7 +13,7 @@ import org.hibernate.query.Query;
 import java.io.File;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegrationTests {
     private static SessionFactory sessionFactory = null;
@@ -42,6 +42,23 @@ public class IntegrationTests {
             DBReader.initSession("hibernate-integration.cfg.xml");
             HibernateUtil.shutdown();
         });
+    }
+
+    @Test
+    public void testCityTable() {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM City");
+            List<City> cities = query.list();
+            assertFalse(cities.isEmpty(), "City table is empty");
+            for (City city : cities) {
+                assertNotNull(city.getCountry(), "City country should not be null");
+                assertNotNull(city.getDistrict(),"City district should not be null");
+            }
+            transaction.commit();
+        } catch (Exception ex) {
+            fail("Failed to check city table presence and structure: " + ex.getMessage());
+        }
     }
 
 }
