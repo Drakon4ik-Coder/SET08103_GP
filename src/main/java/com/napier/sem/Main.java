@@ -107,6 +107,80 @@ public class Main {
                     }
                     return ret;
                 }
+                //Population--------------------------------------------------------------------------------------------
+                case "PopulationWorld": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.WORLD, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationContinent": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.CONTINENT, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationCountry": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.COUNTRY, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationRegion": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.REGION, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationDistrict": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.DISTRICT, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationCity": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.CITY, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                //------------------------------------------------------------------------------------------------------
             }
             return "";
         });
