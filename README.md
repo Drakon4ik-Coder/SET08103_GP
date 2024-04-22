@@ -44,25 +44,11 @@ To set up the project locally, follow these steps:
 git clone https://github.com/Drakon4ik-Coder/SET08103_GP.git
 ```
 
-2. Navigate to the project directory:
+2.  Open project in IntellijIDE
 
-```bash
-cd SET08103_GP
-```
+3. Run Deploy configuration in .run folder
 
-3. Build the Docker image:
-
-```bash
-docker build -t SET08103_GP .
-```
-
-4. Run the Docker container:
-
-```bash
-docker run -d -p 8080:8080 SET08103_GP
-```
-
-5. Access the application through [http://localhost:8080](http://localhost:8080) in your web browser.
+4. Open ```localhost:8080``` in browser of your choice
 
 ## Usage
 
