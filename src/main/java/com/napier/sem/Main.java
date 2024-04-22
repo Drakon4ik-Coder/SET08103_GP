@@ -1,8 +1,13 @@
 package com.napier.sem;
 
+import lombok.ToString;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.List;
@@ -243,14 +248,21 @@ public class Main {
                 }
                 case "Language": {
                     String ret = "";
+                    NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMAN);
                     List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
                     for (Object[] row : languageSpeakers) {
                         String language = (String) row[0];
                         // Filter the results
                         if (language.equals("Chinese") || language.equals("English") || language.equals("Hindi") || language.equals("Spanish") || language.equals("Arabic")) {
-                            Double totalSpeakers = (Double) row[1];
-                            Double percentageOfWorldPopulation = (Double) row[2];
-                            ret += String.format("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
+                            String totalSpeakers = formatter.format(row[1]);
+                            String percentageOfWorldPopulation = Integer.toString((int)Math.round((Double)row[2]))+"%";
+                            JSONObject jsonObject = new JSONObject();
+                            JSONArray jsonArray = new JSONArray();
+                            jsonObject.put("total speakers", totalSpeakers);
+                            jsonObject.put("population percentage", percentageOfWorldPopulation);
+                            jsonObject.put("language", language);
+                            jsonArray.put(jsonObject);
+                            ret+= jsonArray +"\n";
                         }
                     }
                     return ret;

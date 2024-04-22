@@ -92,6 +92,13 @@ reportNameSelect.addEventListener('change', () => {
             limitLabel.style.display = 'block'; // hide the input element
             placeholder = 'Region (e.g. Teheran, Tokyo-to)';
             break;
+        case 'Language':
+            paramInput.style.display = 'none'; // show the input element
+            paramLabel.style.display = 'none'; // show the input element
+            limitInput.style.display = 'none'; // hide the input element
+            limitLabel.style.display = 'none'; // hide the input element
+            placeholder = '';
+            break;
 
         default:
             paramInput.style.display = 'block'; // hide the input element
@@ -122,40 +129,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(data => {
-                const jsonArray = data.trim().split('\n').map(item => JSON.stringify(item));
-                const parsedArray = JSON.parse(`[${jsonArray.join(',')}]`);
+                if (data === "Nothing found" || data === "No such report supported") {
+                    output.innerText = data;
+                } else {
+                    const jsonArray = data.trim().split('\n').map(item => JSON.stringify(item));
+                    const parsedArray = JSON.parse(`[${jsonArray.join(',')}]`);
 
-                const parsedCorrectArray = parsedArray.map(str => JSON.parse(str));
-                console.log(parsedCorrectArray);
+                    const parsedCorrectArray = parsedArray.map(str => JSON.parse(str));
+                    console.log(parsedCorrectArray);
 
-                const firstItem = parsedCorrectArray[0][0];
-                const columns = Object.keys(firstItem);
-                let tableRows = '';
+                    const firstItem = parsedCorrectArray[0][0];
+                    const columns = Object.keys(firstItem);
+                    let tableRows = '';
 
-                parsedCorrectArray.forEach(innerArray => {
-                    innerArray.forEach(item => {
-                        tableRows += `
-                          <tr>
-                            ${columns.map(column => `<td>${item[column]}</td>`).join('')}
-                          </tr>
-                        `;
+                    parsedCorrectArray.forEach(innerArray => {
+                        innerArray.forEach(item => {
+                            tableRows += `
+                              <tr>
+                                ${columns.map(column => `<td>${item[column]}</td>`).join('')}
+                              </tr>
+                            `;
+                        });
                     });
-                });
 
-                const tableHeaders = columns.map(column => `<th>${column.charAt(0).toUpperCase() + column.slice(1)}</th>`).join('');
+                    const tableHeaders = columns.map(column => `<th>${column.charAt(0).toUpperCase() + column.slice(1)}</th>`).join('');
 
-                output.innerHTML = `
-                    <table>
-                        <thead>
-                            <tr>
-                                ${tableHeaders}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${tableRows}
-                        </tbody>
-                    </table>
-                `;
+                    output.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    ${tableHeaders}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${tableRows}
+                            </tbody>
+                        </table>
+                    `;
+                }
             })
             .catch(error => {
                 console.error('Error fetching report:', error);
