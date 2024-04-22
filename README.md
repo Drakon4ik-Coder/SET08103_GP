@@ -2,8 +2,13 @@
 
 This project aims to develop a Java application for population management using Docker for containerization and GitHub for version control. The application will provide functionalities to manage population data efficiently.
 
+## Demo
+
+![](images/demo.gif)
+
 ## Table of Contents
 
+- [Demo](#demo)
 - [Introduction](#introduction)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
