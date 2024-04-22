@@ -2,6 +2,11 @@ package com.napier.sem;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * This class represents a Country with various attributes such as code, name, continent, region, population, and capital.
@@ -57,15 +62,25 @@ public class Country {
      * @return A string representation of the Country object.
      */
     @Override
-    public String toString() {
-        return "Country{" +
-                "code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", continent=" + continent +
-                ", region='" + region + '\'' +
-                ", population=" + population +
-                ", capital=" + (capital != null ? capital.getName() : "null") + // Display capital information
-                '}';
+    public String toString(){
+        int num = population;
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMAN);
+        formatter.setGroupingUsed(true);
+        String formattedNum = formatter.format(num);
+
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("country", name);
+        jsonObject.put("code", code);
+        jsonObject.put("continent", continent);
+        jsonObject.put("region", region);
+        jsonObject.put("population", formattedNum);
+        jsonObject.put("capital", (capital != null ? capital.getName() : "null"));
+
+        jsonArray.put(jsonObject);
+
+        return jsonArray.toString();
     }
 }
 

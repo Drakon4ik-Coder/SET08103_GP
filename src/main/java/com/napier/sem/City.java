@@ -3,6 +3,12 @@ package com.napier.sem;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /*
  * City class for hibernate mapping
  * corresponds to city table in database
@@ -37,12 +43,22 @@ public class City {
      */
     @Override
     public String toString(){
-        return "City{" +
-                "name='" + name + '\'' +
-                ", country='" + country.getName() + '\'' +
-                ", district='" + district + '\'' +
-                ", population=" + population +
-                '}';
+        int num = population;
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMAN);
+        formatter.setGroupingUsed(true);
+        String formattedNum = formatter.format(num);
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("city", name);
+        jsonObject.put("country", country.getName());
+        jsonObject.put("district", district);
+        jsonObject.put("population", formattedNum);
+
+        jsonArray.put(jsonObject);
+
+        return jsonArray.toString();
+
     }
 
     /**
@@ -50,13 +66,6 @@ public class City {
      * @return String representation of the city object if it is a capital city.
      */
     public String toStringCapital(){
-        if (country.getCapital()==this) {
-            return "CapitalCity{" +
-                    "name='" + getName() + '\'' +
-                    ", country='" + getCountry().getName() + '\'' +
-                    ", population=" + getPopulation() +
-                    '}';
-        }
         return toString();
     }
 }
