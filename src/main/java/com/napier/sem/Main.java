@@ -49,7 +49,6 @@ public class Main {
                 case "CapitalContinent": {
                     String ret = "";
                     List<City> capCities = DBReader.queryDB(Query.CapitalCity.CONTINENT_DESC, reportLimit, addParam);
-                    System.out.println("Fuck");
                     System.out.println(capCities);
                     if (capCities != null && !capCities.isEmpty()) {
                         for (City capCity : capCities) {
@@ -108,8 +107,156 @@ public class Main {
                     }
                     return ret;
                 }
+                //Population--------------------------------------------------------------------------------------------
+                case "PopulationWorld": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.WORLD, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationContinent": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.CONTINENT, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationCountry": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.COUNTRY, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationRegion": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.REGION, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationDistrict": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.DISTRICT, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "PopulationCity": {
+                    String ret = "";
+                    List<Population> populations = DBReader.queryDB(Query.Population.CITY, reportLimit, addParam);
+                    if (populations != null && !populations.isEmpty()) {
+                        for (Population population : populations) {
+                            ret += population.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                //City--------------------------------------------------------------------------------------------------
+                case "CityWorld": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.WORLD_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityContinent": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.CONTINENT_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityCountry": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.COUNTRY_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityRegion": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.REGION_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "CityDistrict": {
+                    String ret = "";
+                    List<City> cities = DBReader.queryDB(Query.City.DISTRICT_DESC, reportLimit, addParam);
+                    if (cities != null && !cities.isEmpty()) {
+                        for (City city : cities) {
+                            ret += city.toString() + "\n";
+                        }
+                    } else {
+                        ret = "Nothing found";
+                    }
+                    return ret;
+                }
+                case "Language": {
+                    String ret = "";
+                    List<Object[]> languageSpeakers = DBReader.queryDBNonEntity(Query.Language.LANGUAGE_DESC, 0, "");
+                    for (Object[] row : languageSpeakers) {
+                        String language = (String) row[0];
+                        // Filter the results
+                        if (language.equals("Chinese") || language.equals("English") || language.equals("Hindi") || language.equals("Spanish") || language.equals("Arabic")) {
+                            Double totalSpeakers = (Double) row[1];
+                            Double percentageOfWorldPopulation = (Double) row[2];
+                            ret += String.format("%s: %d speakers (%.2f%% of world population)\n", language, totalSpeakers.intValue(), percentageOfWorldPopulation);
+                        }
+                    }
+                    return ret;
+                }
             }
-            return "";
+            return "No such report supported";
         });
 //--Capital City
 //        System.out.println("World capital city population descending:");

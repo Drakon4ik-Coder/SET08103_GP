@@ -5,6 +5,11 @@ package com.napier.sem;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * Population class containing population data for a given area
@@ -96,19 +101,29 @@ public class Population {
      * @return The population data in a formatted string
      */
     @Override
-    public String toString() {
-        String ret = "Population{" +
-                "name='" + reportName + '\'' +
-                ", total=" + totalPopulation +
-                ", city=" + cityPopulation + "(" + getCityPercentage() + "%)" +
-                ", notCity=";
-        if (notCityPopulation!= -1) {
-            ret += notCityPopulation + "(" + getNotCityPercentage() + "%)";
-        } else {
-            ret += "Not Enough Data";
-        }
-        ret += '}';
-        return ret;
-    }
+    public String toString(){
+        long num1 = totalPopulation;
+        long num2 = cityPopulation;
+        NumberFormat formatter = NumberFormat.getNumberInstance(Locale.GERMAN);
+        formatter.setGroupingUsed(true);
+        String formattedNum1 = formatter.format(num1);
+        String formattedNum2 = formatter.format(num2);
 
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("country", reportName);
+        jsonObject.put("total", formattedNum1);
+        jsonObject.put("city", formattedNum2 + "(" + getCityPercentage() + "%)");
+        String rural = "";
+        if (notCityPopulation!= -1) {
+            rural += notCityPopulation + "(" + getNotCityPercentage() + "%)";
+        } else {
+            rural += "Not Enough Data";
+        }
+        jsonObject.put("rural", rural);
+        jsonArray.put(jsonObject);
+
+        return jsonArray.toString();
+    }
 }

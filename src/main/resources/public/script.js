@@ -1,6 +1,9 @@
 const reportNameSelect = document.getElementById('reportName');
 const paramInput = document.getElementById('param');
 const paramLabel = document.getElementById('paramLabel');
+const limitLabel = document.getElementById('limitLabel');
+const limitInput = document.getElementById('limit');
+
 
 reportNameSelect.addEventListener('change', () => {
     const selectedOption = reportNameSelect.options[reportNameSelect.selectedIndex].value;
@@ -9,24 +12,92 @@ reportNameSelect.addEventListener('change', () => {
     switch (selectedOption) {
         case 'CapitalWorld':
         case 'CountryWorld':
+        case 'CityWorld':
             paramInput.style.display = 'none'; // hide the input element
             paramLabel.style.display = 'none'; // hide the label element
+            limitInput.style.display = 'block'; // show the input element
+            limitLabel.style.display = 'block'; // show the input element
             break;
         case 'CapitalContinent':
         case 'CountryContinent':
+        case 'CityContinent':
             paramInput.style.display = 'block'; // show the input element
             paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'block'; // show the input element
+            limitLabel.style.display = 'block'; // show the input element
             placeholder = 'Continent (e.g. Asia, Europe)';
             break;
         case 'CapitalRegion':
         case 'CountryRegion':
+        case 'CityRegion':
             paramInput.style.display = 'block'; // show the input element
             paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'block'; // show the input element
+            limitLabel.style.display = 'block'; // show the input element
             placeholder = 'Region (e.g. South America, Middle East)';
             break;
-        default:
+        case 'PopulationCountry':
             paramInput.style.display = 'block'; // show the input element
             paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'none'; // hide the input element
+            limitLabel.style.display = 'none'; // hide the input element
+            placeholder = 'Country (e.g. Germany, Ireland)';
+            break;
+        case 'PopulationDistrict':
+            paramInput.style.display = 'block'; // show the input element
+            paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'none'; // hide the input element
+            limitLabel.style.display = 'none'; // hide the input element
+            placeholder = 'Region (e.g. Teheran, Tokyo-to)';
+            break;
+        case 'PopulationCity':
+            paramInput.style.display = 'block'; // hide the input element
+            paramLabel.style.display = 'block'; // hide the label element
+            limitInput.style.display = 'none'; // show the input element
+            limitLabel.style.display = 'none'; // show the input element
+            placeholder = 'Region (e.g. Manchester, Dubai)';
+            break;
+        case 'PopulationContinent':
+            paramInput.style.display = 'block'; // hide the input element
+            paramLabel.style.display = 'block'; // hide the label element
+            limitInput.style.display = 'none'; // show the input element
+            limitLabel.style.display = 'none'; // show the input element
+            placeholder = 'Continent (e.g. Asia, Europe)';
+            break;
+        case 'PopulationRegion':
+            paramInput.style.display = 'block'; // hide the input element
+            paramLabel.style.display = 'block'; // hide the label element
+            limitInput.style.display = 'none'; // show the input element
+            limitLabel.style.display = 'none'; // show the input element
+            placeholder = 'Region (e.g. Teheran, Tokyo-to)';
+            break;
+        case 'PopulationWorld':
+            paramInput.style.display = 'none'; // hide the input element
+            paramLabel.style.display = 'none'; // hide the label element
+            limitInput.style.display = 'none'; // show the input element
+            limitLabel.style.display = 'none'; // show the input element
+            placeholder = 'world';
+            break;
+        case 'CityCountry':
+            paramInput.style.display = 'block'; // show the input element
+            paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'block'; // hide the input element
+            limitLabel.style.display = 'block'; // hide the input element
+            placeholder = 'Country (e.g. Germany, Ireland)';
+            break;
+        case 'CityDistrict':
+            paramInput.style.display = 'block'; // show the input element
+            paramLabel.style.display = 'block'; // show the input element
+            limitInput.style.display = 'block'; // hide the input element
+            limitLabel.style.display = 'block'; // hide the input element
+            placeholder = 'Region (e.g. Teheran, Tokyo-to)';
+            break;
+
+        default:
+            paramInput.style.display = 'block'; // hide the input element
+            paramLabel.style.display = 'block'; // hide the label element
+            limitInput.style.display = 'block'; // show the input element
+            limitLabel.style.display = 'block'; // show the input element
             placeholder = '';
     }
 
